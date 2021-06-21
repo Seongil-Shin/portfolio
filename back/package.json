@@ -10,7 +10,11 @@
    "author": "",
    "license": "ISC",
    "dependencies": {
-      "graphql-yoga": "^1.18.3"
+      "dotenv": "^10.0.0",
+      "graphql-yoga": "^1.18.3",
+      "mysql2": "^2.2.5",
+      "sequelize": "^6.6.2",
+      "sequelize-cli": "^6.2.0"
    },
    "devDependencies": {
       "@babel/cli": "^7.14.5",
