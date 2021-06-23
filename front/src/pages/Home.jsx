@@ -4,78 +4,112 @@ import ProfileContainer from "../containers/ProfileContainer";
 import WorksContainer from "../containers/WorksContainer";
 import ContactContainer from "../containers/ContactContainer";
 import { css, jsx } from "@emotion/react";
-import { Player, play } from "@lottiefiles/react-lottie-player";
+import { Player } from "@lottiefiles/react-lottie-player";
 import scrollVideo from "../assets/scrollVideo.json";
+import { useDispatch, useSelector } from "react-redux";
+import { decrease, increase } from "../modules/pageIndex";
 
 const CurrntPageStyle = (isCur) =>
-   `z-index:${isCur ? "300" : "-300"};
+   `
+   z-index:${isCur ? 1 : -1};
    opacity:${isCur ? "1" : "0"}; 
    transition: opacity 1s linear 0s`;
 
-const ScrollContainer = () =>
-   `position:fixed;
+const PageChangeContainer = () =>
+   `position:absolute;
    bottom:10px;
-   width:1200px; 
+   width:100%; 
    height:100px;
-   text-align:center;`;
+   text-align:center;
+   line-height:100px;
+   z-index:10;
+   `;
 
 const ScrollVideoStyle = (showScroll) =>
    `opacity:${showScroll ? 0.5 : 0}; 
    width:100px;
-   height:100px;`;
+   height:100px;
+   transition: opacity 1s linear 0s`;
+const PageChangeLeft = () => `
+   position:absolute;
+   left:50px;
+   &:hover {
+      cursor:pointer;
+   }
+`;
+const PageChangeRight = () => `
+   position:absolute;
+   right:50px;
+   &:hover {
+      cursor:pointer;
+   }
+`;
 
 function Home() {
-   const [curPage, setCurPage] = useState(0);
-   const [transition, setTransition] = useState(false);
    const [showScroll, setShowScroll] = useState(true);
    const [touchLast, setTouchLast] = useState(false);
-
+   const curPage = useSelector(({ pageIndex }) => pageIndex);
+   const dispatch = useDispatch();
    useEffect(() => {
+      let canEnter = true;
+      let transitionStart = false;
+
+      const checkIsTransitioning = () => {
+         if (!transitionStart) {
+            canEnter = true;
+         }
+      };
       const handleWheelEvent = (e) => {
-         if (transition) {
+         if (!canEnter) {
             return;
          }
-
-         setShowScroll(false);
+         canEnter = false;
          if (e.wheelDeltaY < 0) {
-            setCurPage((prev) => (prev >= 2 ? prev : prev + 1));
-            setTimeout(() => setShowScroll(true), 2000);
+            dispatch(increase());
+            setShowScroll(false);
+            setTimeout(checkIsTransitioning, 50);
          } else {
-            setCurPage((prev) => (prev <= 0 ? prev : prev - 1));
-            setTimeout(() => setShowScroll(true), 2000);
+            dispatch(decrease());
+            setShowScroll(false);
+            setTimeout(checkIsTransitioning, 50);
          }
       };
 
-      const handleTransitionStart = () => setTransition(true);
-      const handleTransitionEnd = () => setTransition(false);
+      const handleTransitionStart = () => {
+         transitionStart = true;
+      };
+      const handleTransitionEnd = () => {
+         canEnter = true;
+         transitionStart = false;
+         setShowScroll(true);
+      };
 
       window.addEventListener("wheel", handleWheelEvent);
       window.addEventListener("transitionstart", handleTransitionStart);
       window.addEventListener("transitionend", handleTransitionEnd);
       return () => {
          window.removeEventListener("wheel", handleWheelEvent);
-         window.removeEventListener("transitionstart", handleTransitionStart);
+         window.addEventListener("transitionstart", handleTransitionStart);
          window.removeEventListener("transitionend", handleTransitionEnd);
       };
-   }, [transition]);
+   }, [dispatch]);
+
    useEffect(() => {
       if (curPage >= 2) {
          setTouchLast(true);
       }
    }, [curPage]);
 
-   const handleVideoEvent = (e) => {
-      if (e === "loop") {
-         if (showScroll) {
-            setShowScroll(false);
-         } else {
-            setShowScroll(true);
-         }
+   const handlePageChangeClick = (offset) => {
+      if (offset < 0) {
+         dispatch(decrease());
+      } else {
+         dispatch(increase());
       }
    };
 
    return (
-      <div className="App-body">
+      <div>
          <div
             className="MainPage"
             css={css`
@@ -97,14 +131,15 @@ function Home() {
             `}>
             <ContactContainer />
          </div>
-         {!touchLast && (
-            <div
-               css={css`
-                  ${ScrollContainer()}
-               `}>
+
+         <div
+            css={css`
+               ${PageChangeContainer()}
+            `}>
+            {" "}
+            {!touchLast ? (
                <Player
                   src={scrollVideo}
-                  onEvent={(e) => handleVideoEvent(e)}
                   speed="0.9"
                   css={css`
                      ${ScrollVideoStyle(showScroll)}
@@ -112,9 +147,31 @@ function Home() {
                   renderer="svg"
                   controls
                   loop
-                  autoplay></Player>
-            </div>
-         )}
+                  autoplay
+               />
+            ) : (
+               <>
+                  {curPage !== 0 && (
+                     <span
+                        onClick={() => handlePageChangeClick(-1)}
+                        css={css`
+                           ${PageChangeLeft()}
+                        `}>
+                        Left
+                     </span>
+                  )}
+                  {curPage !== 2 && (
+                     <span
+                        onClick={() => handlePageChangeClick(1)}
+                        css={css`
+                           ${PageChangeRight()}
+                        `}>
+                        Right
+                     </span>
+                  )}
+               </>
+            )}
+         </div>
       </div>
    );
 }

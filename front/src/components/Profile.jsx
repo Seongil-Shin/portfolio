@@ -4,11 +4,11 @@ import { css, jsx } from "@emotion/react";
 
 const ShortBrief = `
     width:50%;
-    height:100vh;
+    height:100%;
 `;
 const HeaderStyle = `
     position :absolute;
-    top : 15vh;
+    top : 15%;
 `;
 function Profile() {
    return (
