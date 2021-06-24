@@ -3,6 +3,7 @@ const palette = {
    elephant: "#8f8681",
    thatch: "#a67f78",
    gunmetal: "#32435f",
+   err: "#f85f88",
 };
 
 export default palette;

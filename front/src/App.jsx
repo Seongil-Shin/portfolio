@@ -2,6 +2,7 @@ import { Route } from "react-router";
 import Home from "./pages/Home";
 import "./App.css";
 import Project from "./pages/Project";
+import SnackBar from "./components/elements/SnackBar";
 
 function App() {
    return (
@@ -10,6 +11,7 @@ function App() {
             <div className="App-container">
                <Route exact path="/" component={Home} />
                <Route exact path="/project" component={Project} />
+               <SnackBar />
             </div>
          </div>
       </div>

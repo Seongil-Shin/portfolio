@@ -34,7 +34,7 @@ const initialState = 0;
 export default function pageIndex(state = initialState, action) {
    switch (action.type) {
       case INCREASE:
-         if (state >= 2) {
+         if (state >= 3) {
             return state;
          }
          return state + 1;

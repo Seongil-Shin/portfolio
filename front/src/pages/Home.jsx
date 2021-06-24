@@ -3,15 +3,15 @@ import React, { useEffect, useState } from "react";
 import ProfileContainer from "../containers/ProfileContainer";
 import WorksContainer from "../containers/WorksContainer";
 import ContactContainer from "../containers/ContactContainer";
-import { css, jsx } from "@emotion/react";
+import LandingContainer from "../containers/LandingContainer";
+import { css } from "@emotion/react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import scrollVideo from "../assets/scrollVideo.json";
 import { useDispatch, useSelector } from "react-redux";
 import { decrease, increase } from "../modules/pageIndex";
 
 const CurrntPageStyle = (isCur) =>
-   `
-   z-index:${isCur ? 1 : -1};
+   ` z-index:${isCur ? 1 : -1};
    opacity:${isCur ? "1" : "0"}; 
    transition: opacity 1s linear 0s`;
 
@@ -24,7 +24,6 @@ const PageChangeContainer = () =>
    line-height:100px;
    z-index:10;
    `;
-
 const ScrollVideoStyle = (showScroll) =>
    `opacity:${showScroll ? 0.5 : 0}; 
    width:100px;
@@ -95,7 +94,7 @@ function Home() {
    }, [dispatch]);
 
    useEffect(() => {
-      if (curPage >= 2) {
+      if (curPage >= 3) {
          setTouchLast(true);
       }
    }, [curPage]);
@@ -111,27 +110,33 @@ function Home() {
    return (
       <div>
          <div
-            className="MainPage"
+            className="MainPage Landing"
             css={css`
                ${CurrntPageStyle(curPage === 0)}
             `}>
-            <ProfileContainer />
+            <LandingContainer />
          </div>
          <div
             className="MainPage"
             css={css`
                ${CurrntPageStyle(curPage === 1)}
             `}>
-            <WorksContainer />
+            <ProfileContainer />
          </div>
          <div
             className="MainPage"
             css={css`
                ${CurrntPageStyle(curPage === 2)}
             `}>
+            <WorksContainer />
+         </div>
+         <div
+            className="MainPage"
+            css={css`
+               ${CurrntPageStyle(curPage === 3)}
+            `}>
             <ContactContainer />
          </div>
-
          <div
             css={css`
                ${PageChangeContainer()}
@@ -160,7 +165,7 @@ function Home() {
                         Left
                      </span>
                   )}
-                  {curPage !== 2 && (
+                  {curPage !== 3 && (
                      <span
                         onClick={() => handlePageChangeClick(1)}
                         css={css`

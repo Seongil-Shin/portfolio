@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/react";
 
 const imageContainer = `
     width:35%;

@@ -23,18 +23,23 @@
    color: #32435f;
    font-family: jeju;
 }
-
 .App-container {
    position: absolute;
    top: 5vh;
    width: 1280px;
    height: 90vh;
-   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-   filter: drop-shadow(0px 0px 40px #f7f7f7);
    padding: 10px;
-   background-color: #ffffff;
 }
 
+.Page-container {
+   position: absolute;
+   width: 1280px;
+   height: 90vh;
+   padding: 10px;
+   background-color: #ffffff;
+   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+   filter: drop-shadow(0px 0px 40px #f7f7f7);
+}
 .MainPage {
    position: absolute;
    width: 1280px;
