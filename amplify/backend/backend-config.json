@@ -23,5 +23,19 @@
       "providerPlugin": "awscloudformation",
       "type": "manual"
     }
+  },
+  "auth": {
+    "portfolio35e07459": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "portfolioImage": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

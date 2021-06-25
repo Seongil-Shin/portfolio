@@ -1,5 +1,24 @@
-type Todo @model {
-  id: ID!
-  name: String!
-  description: String
+type Landing @model {
+   id: ID!
+   lines: [String]
+}
+
+type Profile @model {
+   id: ID!
+   name: String!
+   stack: Stack
+}
+
+type Stack {
+   id: ID!
+   type: String!
+   image: String!
+}
+
+type Project @model {
+   id: ID!
+   name: String!
+   summary: String!
+   detail: String!
+   image: String!
 }

@@ -1,43 +1,142 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTodo = /* GraphQL */ `
-  mutation CreateTodo(
-    $input: CreateTodoInput!
-    $condition: ModelTodoConditionInput
+export const createLanding = /* GraphQL */ `
+  mutation CreateLanding(
+    $input: CreateLandingInput!
+    $condition: ModelLandingConditionInput
   ) {
-    createTodo(input: $input, condition: $condition) {
+    createLanding(input: $input, condition: $condition) {
       id
-      name
-      description
+      lines
       createdAt
       updatedAt
     }
   }
 `;
-export const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo(
-    $input: UpdateTodoInput!
-    $condition: ModelTodoConditionInput
+export const updateLanding = /* GraphQL */ `
+  mutation UpdateLanding(
+    $input: UpdateLandingInput!
+    $condition: ModelLandingConditionInput
   ) {
-    updateTodo(input: $input, condition: $condition) {
+    updateLanding(input: $input, condition: $condition) {
       id
-      name
-      description
+      lines
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo(
-    $input: DeleteTodoInput!
-    $condition: ModelTodoConditionInput
+export const deleteLanding = /* GraphQL */ `
+  mutation DeleteLanding(
+    $input: DeleteLandingInput!
+    $condition: ModelLandingConditionInput
   ) {
-    deleteTodo(input: $input, condition: $condition) {
+    deleteLanding(input: $input, condition: $condition) {
+      id
+      lines
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createProfile = /* GraphQL */ `
+  mutation CreateProfile(
+    $input: CreateProfileInput!
+    $condition: ModelProfileConditionInput
+  ) {
+    createProfile(input: $input, condition: $condition) {
       id
       name
-      description
+      stack {
+        id
+        type
+        image
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateProfile = /* GraphQL */ `
+  mutation UpdateProfile(
+    $input: UpdateProfileInput!
+    $condition: ModelProfileConditionInput
+  ) {
+    updateProfile(input: $input, condition: $condition) {
+      id
+      name
+      stack {
+        id
+        type
+        image
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteProfile = /* GraphQL */ `
+  mutation DeleteProfile(
+    $input: DeleteProfileInput!
+    $condition: ModelProfileConditionInput
+  ) {
+    deleteProfile(input: $input, condition: $condition) {
+      id
+      name
+      stack {
+        id
+        type
+        image
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createProject = /* GraphQL */ `
+  mutation CreateProject(
+    $input: CreateProjectInput!
+    $condition: ModelProjectConditionInput
+  ) {
+    createProject(input: $input, condition: $condition) {
+      id
+      name
+      summary
+      detail
+      image
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateProject = /* GraphQL */ `
+  mutation UpdateProject(
+    $input: UpdateProjectInput!
+    $condition: ModelProjectConditionInput
+  ) {
+    updateProject(input: $input, condition: $condition) {
+      id
+      name
+      summary
+      detail
+      image
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteProject = /* GraphQL */ `
+  mutation DeleteProject(
+    $input: DeleteProjectInput!
+    $condition: ModelProjectConditionInput
+  ) {
+    deleteProject(input: $input, condition: $condition) {
+      id
+      name
+      summary
+      detail
+      image
       createdAt
       updatedAt
     }

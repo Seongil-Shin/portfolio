@@ -1,34 +1,115 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTodo = /* GraphQL */ `
-  subscription OnCreateTodo {
-    onCreateTodo {
+export const onCreateLanding = /* GraphQL */ `
+  subscription OnCreateLanding {
+    onCreateLanding {
       id
-      name
-      description
+      lines
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateTodo = /* GraphQL */ `
-  subscription OnUpdateTodo {
-    onUpdateTodo {
+export const onUpdateLanding = /* GraphQL */ `
+  subscription OnUpdateLanding {
+    onUpdateLanding {
       id
-      name
-      description
+      lines
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteTodo = /* GraphQL */ `
-  subscription OnDeleteTodo {
-    onDeleteTodo {
+export const onDeleteLanding = /* GraphQL */ `
+  subscription OnDeleteLanding {
+    onDeleteLanding {
+      id
+      lines
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateProfile = /* GraphQL */ `
+  subscription OnCreateProfile {
+    onCreateProfile {
       id
       name
-      description
+      stack {
+        id
+        type
+        image
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateProfile = /* GraphQL */ `
+  subscription OnUpdateProfile {
+    onUpdateProfile {
+      id
+      name
+      stack {
+        id
+        type
+        image
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteProfile = /* GraphQL */ `
+  subscription OnDeleteProfile {
+    onDeleteProfile {
+      id
+      name
+      stack {
+        id
+        type
+        image
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateProject = /* GraphQL */ `
+  subscription OnCreateProject {
+    onCreateProject {
+      id
+      name
+      summary
+      detail
+      image
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateProject = /* GraphQL */ `
+  subscription OnUpdateProject {
+    onUpdateProject {
+      id
+      name
+      summary
+      detail
+      image
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteProject = /* GraphQL */ `
+  subscription OnDeleteProject {
+    onDeleteProject {
+      id
+      name
+      summary
+      detail
+      image
       createdAt
       updatedAt
     }

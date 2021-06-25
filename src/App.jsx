@@ -4,6 +4,11 @@ import "./App.css";
 import Project from "./pages/Project";
 import SnackBar from "./components/elements/SnackBar";
 
+import Amplify from "aws-amplify";
+import awsconfig from "./aws-exports";
+
+Amplify.configure(awsconfig);
+
 function App() {
    return (
       <div className="App">
