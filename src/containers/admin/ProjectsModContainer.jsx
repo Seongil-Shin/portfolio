@@ -1,6 +1,5 @@
-import React from "react";
-import Works from "../components/Works";
-
+import React, { useState } from "react";
+import ProjectsModification from "../../components/ProjectsModification";
 const list = [
    {
       id: 123,
@@ -51,7 +50,22 @@ const list = [
       github: "https://github.com/Seongil-Shin",
    },
 ];
-function WorksContainer() {
-   return <Works list={list} />;
+function ProjectsModContainer() {
+   const [onMod, setOnMod] = useState(false);
+   const [data, setData] = useState({});
+
+   const onChangeData = () => {};
+   const mutate = (isAdd) => {};
+
+   return (
+      <ProjectsModification
+         list={list}
+         setOnMod={setOnMod}
+         onMod={onMod}
+         onChangeData={onChangeData}
+         data={data}
+         mutate={mutate}
+      />
+   );
 }
-export default WorksContainer;
+export default ProjectsModContainer;

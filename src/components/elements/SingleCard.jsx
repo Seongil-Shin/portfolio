@@ -11,7 +11,7 @@ import {
 import palette from "../../lib/styles/palette";
 import { useHistory } from "react-router";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
    root: {
       flexGrow: 1,
    },
@@ -28,15 +28,15 @@ const useStyles = makeStyles((theme) => ({
    },
 }));
 
-function SingleCard({ item }) {
+function SingleCard({ item, setOnMod }) {
    const classes = useStyles();
    const history = useHistory();
+
    const clickGithub = () => {
       window.open(item.github);
    };
-
-   const clickDetail = () => {
-      history.push("/project", item);
+   const clickDetail = (onMod) => {
+      history.push(`/${item.id}`, item);
    };
 
    return (
@@ -68,9 +68,17 @@ function SingleCard({ item }) {
             <Button
                size="small"
                className={classes.buttonColor}
-               onClick={clickDetail}>
+               onClick={() => clickDetail(false)}>
                자세히
             </Button>
+            {setOnMod && (
+               <Button
+                  size="small"
+                  className={classes.buttonColor}
+                  onClick={() => setOnMod(true)}>
+                  수정/삭제
+               </Button>
+            )}
          </CardActions>
       </Card>
    );
