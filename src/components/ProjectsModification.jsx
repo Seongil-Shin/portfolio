@@ -9,7 +9,10 @@ function ProjectsModification({
    data,
    onChangeData,
    mutate,
+   onGoBack,
+   user,
 }) {
+   console.log(user);
    return (
       <div>
          {onMod[0] ? (
@@ -17,9 +20,10 @@ function ProjectsModification({
                data={data}
                onChangeData={onChangeData}
                mutate={mutate}
+               onGoBack={onGoBack}
             />
          ) : (
-            <Works list={list} setOnMod={setOnMod} />
+            <Works list={list} setOnMod={setOnMod} isAdmin={user} />
          )}
       </div>
    );

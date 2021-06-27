@@ -11,12 +11,11 @@ import {
 } from "@material-ui/core";
 import palette from "../../lib/styles/palette";
 import { useHistory } from "react-router";
-import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { css } from "@emotion/react";
 
 const ImgStyle = `
-   --height: 150px;
-   --width: auto;
+   height: 150px;
+   width: auto;
 `;
 
 const useStyles = makeStyles(() => ({
@@ -36,7 +35,7 @@ const useStyles = makeStyles(() => ({
    },
 }));
 
-function SingleCard({ item, setOnMod }) {
+function SingleCard({ item, setOnMod, isAdmin }) {
    const classes = useStyles();
    const history = useHistory();
 
@@ -50,8 +49,9 @@ function SingleCard({ item, setOnMod }) {
    return (
       <Card className={classes.root}>
          <CardMedia className={classes.media}>
-            <AmplifyS3Image
-               imgKey={item.image}
+            <img
+               src={`${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${item.image}`}
+               alt="error"
                css={css`
                   ${ImgStyle}
                `}
@@ -74,7 +74,7 @@ function SingleCard({ item, setOnMod }) {
             </Typography>
          </CardContent>
          <CardActions>
-            {!setOnMod ? (
+            {!isAdmin ? (
                <>
                   <Button
                      size="small"

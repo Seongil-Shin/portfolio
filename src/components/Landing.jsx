@@ -34,7 +34,7 @@ function Landing({ strings }) {
                onInit={(typewriter) => {
                   if (startSecond) {
                      typewriter
-                        .pauseFor(100)
+                        .pauseFor(50)
                         .typeString(`<h1>${strings[1]}</h1>`)
                         .stop()
                         .start();

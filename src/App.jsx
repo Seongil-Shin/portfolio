@@ -5,7 +5,7 @@ import Project from "./pages/Project";
 import Admin from "./pages/Admin";
 import SnackBar from "./components/elements/SnackBar";
 
-import Amplify, { Storage } from "aws-amplify";
+import Amplify from "aws-amplify";
 import awsconfig from "./aws-exports";
 
 Amplify.configure(awsconfig);

@@ -3,6 +3,7 @@ import React from "react";
 import { css } from "@emotion/react";
 import { Button, makeStyles, TextField } from "@material-ui/core";
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
+import palette from "../lib/styles/palette";
 
 const container = `
     display: flex;
@@ -31,13 +32,26 @@ const ImgStyle = `
 const containerText = `
     margin : 50px 30px;
 `;
+
+const goBackContainer = `
+   button {
+      background-color:${palette.thatch};
+      color:white;
+   }
+   
+   button:hover {
+      background-color:${palette.thatch};
+      opacity:0.5;
+      color:white;
+   }
+`;
 const useStyles = makeStyles(() => ({
    button: {
       margin: "0px auto",
    },
 }));
 
-function ProjectMutation({ data, mutate, onChangeData }) {
+function ProjectMutation({ data, mutate, onChangeData, onGoBack }) {
    const classes = useStyles();
    return (
       <div
@@ -164,6 +178,12 @@ function ProjectMutation({ data, mutate, onChangeData }) {
                   <Button variant="outlined" color="primary" onClick={mutate}>
                      추가/수정
                   </Button>
+                  <span
+                     css={css`
+                        ${goBackContainer}
+                     `}>
+                     <Button onClick={onGoBack}>뒤로가기</Button>
+                  </span>
                </div>
             </div>
          </div>

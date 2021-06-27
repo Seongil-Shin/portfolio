@@ -8,7 +8,7 @@ import {
    updateProjectFunc,
 } from "../../lib/api/project";
 
-function ProjectsModContainer() {
+function ProjectsModContainer({ user }) {
    const [onMod, setOnMod] = useState(["", ""]);
    const [data, setData] = useState({});
    const [list, setList] = useState([]);
@@ -41,9 +41,8 @@ function ProjectsModContainer() {
          afterMutate();
       } else if (onMod[0] === "update") {
          setData({ ...onMod[1] });
-         console.log("das");
       }
-   }, [onMod, data]);
+   }, [onMod]);
 
    const onChangeData = (e, type) => {
       if (type === "image") {
@@ -98,6 +97,8 @@ function ProjectsModContainer() {
          onChangeData={onChangeData}
          data={data}
          mutate={mutate}
+         onGoBack={afterMutate}
+         user={user}
       />
    );
 }

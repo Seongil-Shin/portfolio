@@ -6,7 +6,6 @@ import palette from "../lib/styles/palette";
 import SingleCard from "./elements/SingleCard";
 import Pagination from "@material-ui/lab/Pagination";
 import { Button } from "@material-ui/core";
-import Project from "./Project";
 
 const Container = () => `text-align:center`;
 
@@ -49,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
    },
 }));
 
-function Works({ list, setOnMod }) {
+function Works({ list, setOnMod, isAdmin }) {
    const classes = useStyles();
    const [page, setPage] = useState(0);
 
@@ -63,11 +62,11 @@ function Works({ list, setOnMod }) {
          `}>
          <h2
             css={css`
-               ${HeaderStyle(setOnMod ? true : false)}
+               ${HeaderStyle(isAdmin ? true : false)}
             `}>
             Projects
          </h2>
-         {setOnMod && (
+         {isAdmin && (
             <div
                css={css`
                   ${AddButton()}
@@ -83,7 +82,11 @@ function Works({ list, setOnMod }) {
                {list.slice(page * 4, page * 4 + 4).map((item, idx) => {
                   return (
                      <Grid item xs={3} key={idx}>
-                        <SingleCard item={item} setOnMod={setOnMod} />
+                        <SingleCard
+                           item={item}
+                           setOnMod={setOnMod}
+                           isAdmin={isAdmin}
+                        />
                      </Grid>
                   );
                })}

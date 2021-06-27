@@ -4,7 +4,7 @@ import LandingModContainer from "./LandingModContainer";
 import ProfileModContainer from "./ProfileModContainer";
 import ProjectsModContainer from "./ProjectsModContainer";
 
-function AdminContainer() {
+function AdminContainer({ user }) {
    const [page, setPage] = useState("Landing");
    return (
       <div>
@@ -16,7 +16,7 @@ function AdminContainer() {
                <ProfileModContainer />
             )
          ) : (
-            <ProjectsModContainer />
+            <ProjectsModContainer user={user} />
          )}
       </div>
    );

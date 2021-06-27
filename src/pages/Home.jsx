@@ -63,6 +63,10 @@ function Home() {
             return;
          }
          canEnter = false;
+         if (e.path[0].className.includes("MuiGridList")) {
+            canEnter = true;
+            return;
+         }
          if (e.wheelDeltaY < 0) {
             dispatch(increase());
             setShowScroll(false);
