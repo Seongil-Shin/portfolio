@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import React from "react";
 import {
    makeStyles,
@@ -10,6 +11,13 @@ import {
 } from "@material-ui/core";
 import palette from "../../lib/styles/palette";
 import { useHistory } from "react-router";
+import { AmplifyS3Image } from "@aws-amplify/ui-react";
+import { css } from "@emotion/react";
+
+const ImgStyle = `
+   --height: 150px;
+   --width: auto;
+`;
 
 const useStyles = makeStyles(() => ({
    root: {
@@ -41,7 +49,14 @@ function SingleCard({ item, setOnMod }) {
 
    return (
       <Card className={classes.root}>
-         <CardMedia component="img" className={classes.media} src={item.img} />
+         <CardMedia className={classes.media}>
+            <AmplifyS3Image
+               imgKey={item.image}
+               css={css`
+                  ${ImgStyle}
+               `}
+            />
+         </CardMedia>
          <CardContent>
             <Typography
                gutterBottom
@@ -59,25 +74,36 @@ function SingleCard({ item, setOnMod }) {
             </Typography>
          </CardContent>
          <CardActions>
-            <Button
-               size="small"
-               className={classes.buttonColor}
-               onClick={clickGithub}>
-               Github
-            </Button>
-            <Button
-               size="small"
-               className={classes.buttonColor}
-               onClick={() => clickDetail(false)}>
-               자세히
-            </Button>
-            {setOnMod && (
-               <Button
-                  size="small"
-                  className={classes.buttonColor}
-                  onClick={() => setOnMod(true)}>
-                  수정/삭제
-               </Button>
+            {!setOnMod ? (
+               <>
+                  <Button
+                     size="small"
+                     className={classes.buttonColor}
+                     onClick={clickGithub}>
+                     Github
+                  </Button>
+                  <Button
+                     size="small"
+                     className={classes.buttonColor}
+                     onClick={() => clickDetail(false)}>
+                     자세히
+                  </Button>
+               </>
+            ) : (
+               <>
+                  <Button
+                     size="small"
+                     className={classes.buttonColor}
+                     onClick={() => setOnMod([`update`, item])}>
+                     수정
+                  </Button>
+                  <Button
+                     size="small"
+                     className={classes.buttonColor}
+                     onClick={() => setOnMod(["delete", item.id])}>
+                     삭제
+                  </Button>
+               </>
             )}
          </CardActions>
       </Card>

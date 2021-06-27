@@ -69,7 +69,7 @@ export const getProject = /* GraphQL */ `
   query GetProject($id: ID!) {
     getProject(id: $id) {
       id
-      name
+      title
       summary
       detail
       image
@@ -87,7 +87,7 @@ export const listProjects = /* GraphQL */ `
     listProjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        name
+        title
         summary
         detail
         image

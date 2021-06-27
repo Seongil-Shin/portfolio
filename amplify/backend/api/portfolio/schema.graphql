@@ -17,8 +17,9 @@ type Stack {
 
 type Project @model {
    id: ID!
-   name: String!
+   title: String!
    summary: String!
    detail: String!
    image: String!
+   github: String!
 }

@@ -101,7 +101,7 @@ export const createProject = /* GraphQL */ `
   ) {
     createProject(input: $input, condition: $condition) {
       id
-      name
+      title
       summary
       detail
       image
@@ -117,7 +117,7 @@ export const updateProject = /* GraphQL */ `
   ) {
     updateProject(input: $input, condition: $condition) {
       id
-      name
+      title
       summary
       detail
       image
@@ -133,7 +133,7 @@ export const deleteProject = /* GraphQL */ `
   ) {
     deleteProject(input: $input, condition: $condition) {
       id
-      name
+      title
       summary
       detail
       image

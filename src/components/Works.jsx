@@ -71,7 +71,7 @@ function Works({ list, setOnMod }) {
                css={css`
                   ${AddButton()}
                `}>
-               <Button onClick={() => setOnMod(true)}>추가</Button>
+               <Button onClick={() => setOnMod(["add", null])}>추가</Button>
             </div>
          )}
          <div

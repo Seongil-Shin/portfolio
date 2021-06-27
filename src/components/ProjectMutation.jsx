@@ -1,50 +1,171 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
+import { Button, makeStyles, TextField } from "@material-ui/core";
+import { AmplifyS3Image } from "@aws-amplify/ui-react";
 
+const container = `
+    display: flex;
+    flex-basis:35%;
+`;
 const imageContainer = `
-    width:35%;
-    height:90vh;
-    float:left;
+    flex-basis:35%;
     padding:10px;
-    line-height:100vh;
+    height:90vh;
 `;
 const image = ` 
-    transform: translateY(20%);
     border-radius:10px;
+    height:70%;
 `;
 const detailContainer = `
+    flex-basis:65%;
     height:90vh;
-    padding:10px;
-    width:60%;
-    float:right;
+    padding:50px;
+    box-sizing: border-box;
 `;
 
-function ProjectMutation({ data, mutate, setOnMod }) {
+const ImgStyle = `
+   --height: auto;
+   --width: 100%;
+`;
+const containerText = `
+    margin : 50px 30px;
+`;
+const useStyles = makeStyles(() => ({
+   button: {
+      margin: "0px auto",
+   },
+}));
+
+function ProjectMutation({ data, mutate, onChangeData }) {
+   const classes = useStyles();
    return (
-      <div>
+      <div
+         css={css`
+            ${container}
+         `}>
          <div
             css={css`
                ${imageContainer}
             `}>
-            {data?.img && (
-               <img
-                  id="project-image"
-                  src={data.img}
-                  width="100%"
-                  height="auto"
-                  alt="error"
-                  css={css`
-                     ${image}
-                  `}
+            <div
+               css={css`
+                  ${image}
+               `}>
+               {data?.image &&
+                  (typeof data.image === "object" ? (
+                     <img
+                        id="project-image"
+                        src={URL.createObjectURL(data.image)}
+                        width="100%"
+                        height="auto"
+                        alt="error"
+                     />
+                  ) : (
+                     <AmplifyS3Image
+                        imgKey={data.image}
+                        css={css`
+                           ${ImgStyle}
+                        `}
+                     />
+                  ))}
+            </div>
+            <label key="image_upload">
+               <input
+                  type="file"
+                  accept="image/*"
+                  style={{ display: "none" }}
+                  onChange={(e) => onChangeData(e, "image")}
                />
+               <Button
+                  variant="outlined"
+                  color="primary"
+                  className={classes.button}
+                  component="span">
+                  추가/수정
+               </Button>
+            </label>
+
+            {data?.image && (
+               <Button
+                  variant="outlined"
+                  color="secondary"
+                  className={classes.button}
+                  onClick={() => onChangeData(null, "image")}>
+                  삭제
+               </Button>
             )}
          </div>
          <div
             css={css`
                ${detailContainer}
             `}>
-            detail
+            <h2>내용</h2>
+
+            <div>
+               <div
+                  css={css`
+                     ${containerText}
+                  `}>
+                  <div>제목</div>
+                  <TextField
+                     className={classes.textField}
+                     onChange={onChangeData}
+                     value={data.title}
+                     name="title"
+                     fullWidth
+                  />
+               </div>
+               <div
+                  css={css`
+                     ${containerText}
+                  `}>
+                  <div>요약</div>
+                  <TextField
+                     className={classes.textField}
+                     onChange={onChangeData}
+                     name="summary"
+                     value={data.summary}
+                     fullWidth
+                  />
+               </div>
+               <div
+                  css={css`
+                     ${containerText}
+                  `}>
+                  <div>내용</div>
+                  <TextField
+                     name="detail"
+                     className={classes.textField}
+                     onChange={onChangeData}
+                     fullWidth
+                     value={data.detail}
+                     multiline
+                  />
+               </div>
+               <div
+                  css={css`
+                     ${containerText}
+                  `}>
+                  <div>깃허브 링크</div>
+                  <TextField
+                     name="github"
+                     className={classes.textField}
+                     onChange={onChangeData}
+                     value={data.github}
+                     fullWidth
+                     multiline
+                  />
+               </div>
+               <div
+                  css={css`
+                     ${containerText}
+                  `}>
+                  <Button variant="outlined" color="primary" onClick={mutate}>
+                     추가/수정
+                  </Button>
+               </div>
+            </div>
          </div>
       </div>
    );

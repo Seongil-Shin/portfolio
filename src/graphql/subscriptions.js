@@ -80,7 +80,7 @@ export const onCreateProject = /* GraphQL */ `
   subscription OnCreateProject {
     onCreateProject {
       id
-      name
+      title
       summary
       detail
       image
@@ -93,7 +93,7 @@ export const onUpdateProject = /* GraphQL */ `
   subscription OnUpdateProject {
     onUpdateProject {
       id
-      name
+      title
       summary
       detail
       image
@@ -106,7 +106,7 @@ export const onDeleteProject = /* GraphQL */ `
   subscription OnDeleteProject {
     onDeleteProject {
       id
-      name
+      title
       summary
       detail
       image

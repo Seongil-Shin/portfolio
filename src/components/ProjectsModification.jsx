@@ -12,7 +12,7 @@ function ProjectsModification({
 }) {
    return (
       <div>
-         {onMod ? (
+         {onMod[0] ? (
             <ProjectMutation
                data={data}
                onChangeData={onChangeData}
