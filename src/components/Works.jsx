@@ -6,6 +6,7 @@ import palette from "../lib/styles/palette";
 import SingleCard from "./elements/SingleCard";
 import Pagination from "@material-ui/lab/Pagination";
 import { Button } from "@material-ui/core";
+import Project from "./Project";
 
 const Container = () => `text-align:center`;
 

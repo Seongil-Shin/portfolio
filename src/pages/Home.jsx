@@ -13,7 +13,7 @@ import { decrease, increase } from "../modules/pageIndex";
 const CurrntPageStyle = (isCur) =>
    ` z-index:${isCur ? 1 : -1};
    opacity:${isCur ? "1" : "0"}; 
-   transition: opacity 1s linear 0s`;
+   transition: opacity 0.5s linear 0s`;
 
 const PageChangeContainer = () =>
    `position:absolute;

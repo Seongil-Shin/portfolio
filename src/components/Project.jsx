@@ -1,50 +1,91 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
+import { AmplifyS3Image } from "@aws-amplify/ui-react";
+import { Divider } from "@material-ui/core";
 
+const title = `
+   text-align:center;
+`;
+const container = `
+    display: flex;
+`;
 const imageContainer = `
-    width:35%;
-    height:90vh;
-    float:left;
+    flex-basis:40%;
     padding:10px;
-    line-height:100vh;
+    height:80vh;
 `;
 const image = ` 
-    transform: translateY(20%);
     border-radius:10px;
+    height:70%;
+    transform: translateY(20%);
 `;
 const detailContainer = `
-    height:90vh;
-    padding:10px;
-    width:60%;
-    float:right;
+    flex-basis:60%;
+    height:80vh;
+    padding:50px;
+    box-sizing: border-box;
+`;
+
+const ImgStyle = `
+   --height: auto;
+   --width: 100%;
+`;
+const containerText = `
+    margin : 50px 30px;
 `;
 
 function Project({ data }) {
    return (
-      <div>
+      <>
+         <h1
+            css={css`
+               ${title}
+            `}>
+            {data.title}
+         </h1>
          <div
             css={css`
-               ${imageContainer}
+               ${container}
             `}>
-            <img
-               id="project-image"
-               src={data.img}
-               width="100%"
-               height="auto"
-               alt="error"
+            <div
                css={css`
-                  ${image}
-               `}
-            />
+                  ${imageContainer}
+               `}>
+               <div
+                  css={css`
+                     ${image}
+                  `}>
+                  <AmplifyS3Image
+                     imgKey={data.image}
+                     css={css`
+                        ${ImgStyle}
+                     `}
+                  />
+               </div>
+            </div>
+            <div
+               css={css`
+                  ${detailContainer}
+               `}>
+               <div>
+                  <div
+                     css={css`
+                        ${containerText}
+                     `}>
+                     {data.detail}
+                  </div>
+                  <Divider />
+                  <div
+                     css={css`
+                        ${containerText}
+                     `}>
+                     <div>깃허브 : {data.github}</div>
+                  </div>
+               </div>
+            </div>
          </div>
-         <div
-            css={css`
-               ${detailContainer}
-            `}>
-            detail
-         </div>
-      </div>
+      </>
    );
 }
 export default Project;

@@ -25,6 +25,7 @@ export const createProjectFunc = async (data) => {
       detail: data.detail,
       summary: data.summary,
       image: res.key,
+      github: data.github,
    };
    try {
       await API.graphql({
@@ -54,6 +55,7 @@ export const updateProjectFunc = async (data) => {
          detail: data.detail,
          summary: data.summary,
          image: data.image,
+         github: data.github,
       };
       if (typeof data.image === "object") {
          await Storage.remove(data.imageKey);
@@ -73,11 +75,12 @@ export const updateProjectFunc = async (data) => {
    }
 };
 
-export const DeleteProject = async (id) => {
+export const DeleteProject = async (data) => {
    try {
+      await Storage.remove(data.image);
       const res = await API.graphql({
          query: deleteProject,
-         variables: { input: { id: id } },
+         variables: { input: { id: data.id } },
       });
       return res;
    } catch (err) {

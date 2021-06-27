@@ -43,8 +43,8 @@ function SingleCard({ item, setOnMod }) {
    const clickGithub = () => {
       window.open(item.github);
    };
-   const clickDetail = (onMod) => {
-      history.push(`/${item.id}`, item);
+   const clickDetail = (item) => {
+      history.push(`/project`, item);
    };
 
    return (
@@ -85,7 +85,7 @@ function SingleCard({ item, setOnMod }) {
                   <Button
                      size="small"
                      className={classes.buttonColor}
-                     onClick={() => clickDetail(false)}>
+                     onClick={() => clickDetail(item)}>
                      자세히
                   </Button>
                </>
@@ -100,7 +100,9 @@ function SingleCard({ item, setOnMod }) {
                   <Button
                      size="small"
                      className={classes.buttonColor}
-                     onClick={() => setOnMod(["delete", item.id])}>
+                     onClick={() =>
+                        setOnMod(["delete", { id: item.id, image: item.image }])
+                     }>
                      삭제
                   </Button>
                </>

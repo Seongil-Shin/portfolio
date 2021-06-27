@@ -28,10 +28,9 @@ function ProjectsModContainer() {
    }, [refrash]);
 
    useEffect(() => {
-      const callDeleteApi = async (id) => {
+      const callDeleteApi = async (data) => {
          try {
-            console.log(id);
-            const res = await DeleteProject(id);
+            const res = await DeleteProject(data);
             return res;
          } catch (err) {
             console.log(err);

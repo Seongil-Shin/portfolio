@@ -2,28 +2,14 @@
 import React, { useState } from "react";
 import { css } from "@emotion/react";
 import Typewriter from "typewriter-effect";
-import { getLandingStrings } from "../lib/api/landing";
-import { useEffect } from "react";
 const container = `
 text-align:center;
 margin-top:30vh;
 `;
 
-function Landing() {
+function Landing({ strings }) {
    const [startSecond, setStartSecond] = useState(false);
-   const [strings, setStrings] = useState(["", ""]);
-   useEffect(() => {
-      const getData = async () => {
-         await getLandingStrings()
-            .then((res) => {
-               setStrings(res.data.listLandings.items[0].lines);
-            })
-            .catch((err) => {
-               console.log(err);
-            });
-      };
-      getData();
-   }, []);
+
    return (
       <div
          css={css`

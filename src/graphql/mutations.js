@@ -105,6 +105,7 @@ export const createProject = /* GraphQL */ `
       summary
       detail
       image
+      github
       createdAt
       updatedAt
     }
@@ -121,6 +122,7 @@ export const updateProject = /* GraphQL */ `
       summary
       detail
       image
+      github
       createdAt
       updatedAt
     }
@@ -137,6 +139,7 @@ export const deleteProject = /* GraphQL */ `
       summary
       detail
       image
+      github
       createdAt
       updatedAt
     }
