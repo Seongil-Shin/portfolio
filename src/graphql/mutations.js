@@ -48,11 +48,7 @@ export const createProfile = /* GraphQL */ `
     createProfile(input: $input, condition: $condition) {
       id
       name
-      stack {
-        id
-        type
-        image
-      }
+      image
       createdAt
       updatedAt
     }
@@ -66,11 +62,7 @@ export const updateProfile = /* GraphQL */ `
     updateProfile(input: $input, condition: $condition) {
       id
       name
-      stack {
-        id
-        type
-        image
-      }
+      image
       createdAt
       updatedAt
     }
@@ -84,11 +76,91 @@ export const deleteProfile = /* GraphQL */ `
     deleteProfile(input: $input, condition: $condition) {
       id
       name
-      stack {
-        id
-        type
-        image
-      }
+      image
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createProfileAboutme = /* GraphQL */ `
+  mutation CreateProfileAboutme(
+    $input: CreateProfileAboutmeInput!
+    $condition: ModelProfileAboutmeConditionInput
+  ) {
+    createProfileAboutme(input: $input, condition: $condition) {
+      id
+      line
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateProfileAboutme = /* GraphQL */ `
+  mutation UpdateProfileAboutme(
+    $input: UpdateProfileAboutmeInput!
+    $condition: ModelProfileAboutmeConditionInput
+  ) {
+    updateProfileAboutme(input: $input, condition: $condition) {
+      id
+      line
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteProfileAboutme = /* GraphQL */ `
+  mutation DeleteProfileAboutme(
+    $input: DeleteProfileAboutmeInput!
+    $condition: ModelProfileAboutmeConditionInput
+  ) {
+    deleteProfileAboutme(input: $input, condition: $condition) {
+      id
+      line
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createStack = /* GraphQL */ `
+  mutation CreateStack(
+    $input: CreateStackInput!
+    $condition: ModelStackConditionInput
+  ) {
+    createStack(input: $input, condition: $condition) {
+      id
+      image
+      type
+      title
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateStack = /* GraphQL */ `
+  mutation UpdateStack(
+    $input: UpdateStackInput!
+    $condition: ModelStackConditionInput
+  ) {
+    updateStack(input: $input, condition: $condition) {
+      id
+      image
+      type
+      title
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteStack = /* GraphQL */ `
+  mutation DeleteStack(
+    $input: DeleteStackInput!
+    $condition: ModelStackConditionInput
+  ) {
+    deleteStack(input: $input, condition: $condition) {
+      id
+      image
+      type
+      title
       createdAt
       updatedAt
     }

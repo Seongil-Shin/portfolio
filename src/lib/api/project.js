@@ -7,11 +7,12 @@ import {
 import { listProjects } from "../../graphql/queries";
 import randomString from "randomstring";
 
-async function uploadImg(file) {
+export async function uploadImg(file) {
    try {
       const key = randomString.generate();
       return await Storage.put(key, file, {
-         contentType: "image/*", // contentType is optional
+         level: "public",
+         contentType: "image/*",
       });
    } catch (error) {
       console.log("Error uploading file: ", error);

@@ -4,8 +4,9 @@ import React from "react";
 import { css } from "@emotion/react";
 
 const signoutContainer = `
-    position:absolute;
-    right:0px;
+    position:fixed;
+    right:100px;
+    top:100px;
     button.button {
         min-width:100px !important;
         width:100px !important;

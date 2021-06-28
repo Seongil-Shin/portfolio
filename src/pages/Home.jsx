@@ -63,7 +63,11 @@ function Home() {
             return;
          }
          canEnter = false;
-         if (e.path[0].className.includes("MuiGridList")) {
+         const className = e.path[0].className;
+         if (
+            typeof className === "string" &&
+            className.includes("MuiGridList")
+         ) {
             canEnter = true;
             return;
          }

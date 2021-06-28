@@ -45,6 +45,7 @@ const StackBackEnd = `
 const StackEtc = `
    flex-basis:33%;
 `;
+
 function Profile({ data }) {
    return (
       <>
@@ -62,27 +63,30 @@ function Profile({ data }) {
                   css={css`
                      ${ImgStyle}
                   `}>
-                  <img src={data.image} alt="error" />
+                  <img
+                     src={`${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.image}`}
+                     alt="error"
+                  />
                </div>
                <div
                   css={css`
                      ${ShortIntroduction}
                   `}>
-                  <h4>신성일</h4>
+                  <h4>{data.name}</h4>
                   <div style={{ textAlign: "left", paddingLeft: "30px" }}>
                      <ul>
-                        <li>웹 프론트엔드/백엔드 개발자 </li>
-                        <br />
-                        <li>서울과학기술대학교 컴퓨터공학과</li>
-                        <br />
-                        <li>이메일 : callmeshin75@gmail.com</li>
-                        <br />
+                        {data.aboutme?.map((item) => (
+                           <>
+                              <li>{item?.line}</li>
+                              <br />
+                           </>
+                        ))}
                         <li>
                            깃허브 :{" "}
                            <a
                               href="https://github.com/Seongil-Shin"
-                              target="_blank">
-                              {" "}
+                              target="_blank"
+                              rel="noreferrer">
                               https://github.com/Seongil-Shin
                            </a>
                         </li>
@@ -105,7 +109,7 @@ function Profile({ data }) {
                         ${StackFrontEnd}
                      `}>
                      <h3>Front end</h3>
-                     <CustomGridList type="front" />
+                     <CustomGridList tileData={data?.stack?.front} />
                   </div>
 
                   <div
@@ -113,7 +117,7 @@ function Profile({ data }) {
                         ${StackBackEnd}
                      `}>
                      <h3>Back end</h3>
-                     <CustomGridList type="back" />
+                     <CustomGridList tileData={data?.stack?.back} />
                   </div>
 
                   <div
@@ -121,7 +125,7 @@ function Profile({ data }) {
                         ${StackEtc}
                      `}>
                      <h3>Etc</h3>
-                     <CustomGridList type="etc" />
+                     <CustomGridList tileData={data?.stack?.etc} />
                   </div>
                </div>
             </div>

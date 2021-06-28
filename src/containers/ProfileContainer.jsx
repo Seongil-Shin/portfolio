@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Profile from "../components/Profile";
-
-const profile = {
-   image: "https://t1.daumcdn.net/cfile/tistory/240814485574155029",
-};
+import { getProfileData } from "../lib/api/profile";
 
 function ProfileContainer() {
-   return <Profile data={profile} />;
+   const [data, setData] = useState({});
+   useEffect(() => {
+      const getProfile = async () => {
+         const res = await getProfileData();
+         setData(res);
+      };
+      getProfile();
+   }, []);
+
+   return <Profile data={data} />;
 }
 export default ProfileContainer;

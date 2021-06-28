@@ -33,11 +33,7 @@ export const getProfile = /* GraphQL */ `
     getProfile(id: $id) {
       id
       name
-      stack {
-        id
-        type
-        image
-      }
+      image
       createdAt
       updatedAt
     }
@@ -53,11 +49,65 @@ export const listProfiles = /* GraphQL */ `
       items {
         id
         name
-        stack {
-          id
-          type
-          image
-        }
+        image
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getProfileAboutme = /* GraphQL */ `
+  query GetProfileAboutme($id: ID!) {
+    getProfileAboutme(id: $id) {
+      id
+      line
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listProfileAboutmes = /* GraphQL */ `
+  query ListProfileAboutmes(
+    $filter: ModelProfileAboutmeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProfileAboutmes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        line
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getStack = /* GraphQL */ `
+  query GetStack($id: ID!) {
+    getStack(id: $id) {
+      id
+      image
+      type
+      title
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listStacks = /* GraphQL */ `
+  query ListStacks(
+    $filter: ModelStackFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        image
+        type
+        title
         createdAt
         updatedAt
       }

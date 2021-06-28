@@ -12,7 +12,6 @@ function ProjectsModification({
    onGoBack,
    user,
 }) {
-   console.log(user);
    return (
       <div>
          {onMod[0] ? (

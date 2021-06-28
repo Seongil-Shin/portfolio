@@ -36,11 +36,7 @@ export const onCreateProfile = /* GraphQL */ `
     onCreateProfile {
       id
       name
-      stack {
-        id
-        type
-        image
-      }
+      image
       createdAt
       updatedAt
     }
@@ -51,11 +47,7 @@ export const onUpdateProfile = /* GraphQL */ `
     onUpdateProfile {
       id
       name
-      stack {
-        id
-        type
-        image
-      }
+      image
       createdAt
       updatedAt
     }
@@ -66,11 +58,73 @@ export const onDeleteProfile = /* GraphQL */ `
     onDeleteProfile {
       id
       name
-      stack {
-        id
-        type
-        image
-      }
+      image
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateProfileAboutme = /* GraphQL */ `
+  subscription OnCreateProfileAboutme {
+    onCreateProfileAboutme {
+      id
+      line
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateProfileAboutme = /* GraphQL */ `
+  subscription OnUpdateProfileAboutme {
+    onUpdateProfileAboutme {
+      id
+      line
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteProfileAboutme = /* GraphQL */ `
+  subscription OnDeleteProfileAboutme {
+    onDeleteProfileAboutme {
+      id
+      line
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateStack = /* GraphQL */ `
+  subscription OnCreateStack {
+    onCreateStack {
+      id
+      image
+      type
+      title
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateStack = /* GraphQL */ `
+  subscription OnUpdateStack {
+    onUpdateStack {
+      id
+      image
+      type
+      title
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteStack = /* GraphQL */ `
+  subscription OnDeleteStack {
+    onDeleteStack {
+      id
+      image
+      type
+      title
       createdAt
       updatedAt
     }

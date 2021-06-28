@@ -6,13 +6,17 @@ type Landing @model {
 type Profile @model {
    id: ID!
    name: String!
-   stack: Stack
-}
-
-type Stack {
-   id: ID!
-   type: String!
    image: String!
+}
+type ProfileAboutme @model {
+   id: ID!
+   line: String!
+}
+type Stack @model {
+   id: ID!
+   image: String!
+   type: String!
+   title: String!
 }
 
 type Project @model {
