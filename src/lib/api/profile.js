@@ -14,6 +14,10 @@ import {
 } from "../../graphql/queries";
 import { uploadImg } from "./project";
 
+const compare = (a, b) => {
+   return a.createdAt < b.createdAt ? -1 : 1;
+};
+
 export const getProfileData = async () => {
    const profile = await API.graphql({ query: listProfiles });
    const aboutme = await API.graphql({ query: listProfileAboutmes });
@@ -22,7 +26,7 @@ export const getProfileData = async () => {
       profileId: profile.data.listProfiles.items[0].id,
       image: profile.data.listProfiles.items[0].image,
       name: profile.data.listProfiles.items[0].name,
-      aboutme: aboutme.data.listProfileAboutmes.items.sort(),
+      aboutme: aboutme.data.listProfileAboutmes.items.sort(compare),
       stack: {
          front: [],
          back: [],

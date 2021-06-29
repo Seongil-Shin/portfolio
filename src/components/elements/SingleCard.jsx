@@ -16,6 +16,7 @@ import { css } from "@emotion/react";
 const ImgStyle = `
    height: 150px;
    width: auto;
+   object-fit:contain;
 `;
 
 const useStyles = makeStyles(() => ({

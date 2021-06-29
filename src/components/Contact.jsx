@@ -78,7 +78,7 @@ function Contact({ sendEmail, data, onFormChange, errEmail, errName }) {
                   {errName}
                </div>
             )}
-            <Grid item xs={12} md={6} justify="flex-start">
+            <Grid item xs={12} md={6}>
                <TextField
                   required
                   id="user_email"

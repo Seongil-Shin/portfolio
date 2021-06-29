@@ -75,9 +75,9 @@ function Profile({ data }) {
                   <h4>{data.name}</h4>
                   <div style={{ textAlign: "left", paddingLeft: "30px" }}>
                      <ul>
-                        {data.aboutme?.map((item) => (
+                        {data.aboutme?.map((item, idx) => (
                            <>
-                              <li>{item?.line}</li>
+                              <li key={`list-${idx}`}>{item?.line}</li>
                               <br />
                            </>
                         ))}

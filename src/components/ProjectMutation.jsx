@@ -185,6 +185,16 @@ function ProjectMutation({ data, mutate, onChangeData, onGoBack }) {
                      <Button onClick={onGoBack}>뒤로가기</Button>
                   </span>
                </div>
+               <div
+                  css={css`
+                     ${containerText}
+                  `}>
+                  <div>태그</div>
+                  <br />
+                  {'<a href="" target="_blank" ref="noreferrer"></a>'}
+                  <br />
+                  {"<br/><br/>"}
+               </div>
             </div>
          </div>
       </div>

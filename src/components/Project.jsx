@@ -19,7 +19,7 @@ const imageContainer = `
 const image = ` 
     border-radius:10px;
     height:70%;
-    transform: translateY(20%);
+    transform:translateY(10%);
 `;
 const detailContainer = `
     flex-basis:60%;
@@ -53,6 +53,7 @@ const goBackContainer = `
 
 function Project({ data }) {
    const history = useHistory();
+   console.log(data.detail);
    return (
       <>
          <h1
@@ -90,15 +91,19 @@ function Project({ data }) {
                   <div
                      css={css`
                         ${containerText}
-                     `}>
-                     {data.detail}
-                  </div>
+                     `}
+                     dangerouslySetInnerHTML={{ __html: data.detail }}></div>
                   <Divider />
                   <div
                      css={css`
                         ${containerText}
                      `}>
-                     <div>깃허브 : {data.github}</div>
+                     <div>
+                        깃허브 :{" "}
+                        <a href={data.github} target="_blank" rel="noreferrer">
+                           {data.github}
+                        </a>
+                     </div>
                   </div>
 
                   <div

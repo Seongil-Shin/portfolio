@@ -30,13 +30,10 @@ const useStyles = makeStyles((theme) => ({
       "& ::-webkit-scrollbar-thumb:hover": {
          background: palette.gunmetal,
       },
-      "& .MuiGridListTile-imgFullWidth": {
-         width: "auto",
-         height: "100%",
-      },
-      "& .MuiGridListTile-imgFullHeight": {
-         height: "100%",
-         width: "auto",
+      "& img": {
+         width: "100%",
+         height: "180px",
+         objectFit: "contain",
       },
    },
    gridList: {
@@ -67,35 +64,42 @@ export default function CustomGridList({ tileData, deleteStack }) {
 
    return (
       <div className={classes.root}>
-         <GridList cellHeight={180} cols={1} className={classes.gridList}>
-            {tileData?.map((tile, idx) => (
-               <GridListTile
-                  key={`tile-${tile.type}-${idx}`}
-                  className={classes.item}>
-                  {typeof tile.image === "object" ? (
-                     <img src={URL.createObjectURL(tile.image)} alt="error" />
-                  ) : (
-                     <img
-                        src={`${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${tile.image}`}
-                        alt={tile.title}
+         {" "}
+         {tileData && (
+            <GridList cellHeight={180} cols={1} className={classes.gridList}>
+               {tileData.map((tile, idx) => (
+                  <GridListTile
+                     key={`tile-${tile.type}-${idx}`}
+                     className={classes.item}>
+                     {typeof tile.image === "object" ? (
+                        <img
+                           src={URL.createObjectURL(tile.image)}
+                           alt="error"
+                        />
+                     ) : (
+                        <img
+                           src={`${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${tile.image}`}
+                           alt={tile.title}
+                        />
+                     )}
+                     <GridListTileBar
+                        title={tile.title}
+                        key={`tilebar-${tile.type}-${idx}`}
+                        className="item-bar"
+                        actionIcon={
+                           signined && (
+                              <Button
+                                 color="secondary"
+                                 onClick={() => deleteStack(tile)}>
+                                 삭제
+                              </Button>
+                           )
+                        }
                      />
-                  )}
-                  <GridListTileBar
-                     title={tile.title}
-                     className="item-bar"
-                     actionIcon={
-                        signined && (
-                           <Button
-                              color="secondary"
-                              onClick={() => deleteStack(tile)}>
-                              삭제
-                           </Button>
-                        )
-                     }
-                  />
-               </GridListTile>
-            ))}
-         </GridList>
+                  </GridListTile>
+               ))}
+            </GridList>
+         )}
       </div>
    );
 }
