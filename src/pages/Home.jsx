@@ -15,19 +15,19 @@ const CurrntPageStyle = (isCur) =>
    opacity:${isCur ? "1" : "0"}; 
    transition: opacity 0.5s linear 0s`;
 
-const PageChangeContainer = () =>
-   `position:absolute;
-   bottom:10px;
+const PageChangeContainer = () => `
+   position:relative;
+   top: 85vh;
    width:100%; 
-   height:100px;
+   height: 10vh;
    text-align:center;
    line-height:100px;
    z-index:10;
-   `;
+`;
 const ScrollVideoStyle = (showScroll) =>
    `opacity:${showScroll ? 0.5 : 0}; 
    width:100px;
-   height:100px;
+   height: 10vh;
    transition: opacity 1s linear 0s`;
 const PageChangeLeft = () => `
    position:absolute;

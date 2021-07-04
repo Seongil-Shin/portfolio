@@ -10,8 +10,14 @@ import { Button } from "@material-ui/core";
 const Container = () => `text-align:center`;
 
 const HeaderStyle = (onMod) => `
-    margin-top:100px;
-    margin-bottom:${onMod ? "" : "1"}50px;
+    margin-top:10vh;
+    margin-bottom:${onMod ? "" : "1"}5vh;
+    
+   @media only screen and (max-height: 720px) {
+      margin-top:5vh;
+      margin-bottom:${onMod ? "" : "1"}0vh;
+
+   }
 `;
 
 const ListContainer = () => `

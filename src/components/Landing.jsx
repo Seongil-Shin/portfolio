@@ -2,9 +2,14 @@
 import React, { useState } from "react";
 import { css } from "@emotion/react";
 import Typewriter from "typewriter-effect";
+import mediaquery from "../lib/styles/mediaquery";
+
 const container = `
-text-align:center;
-margin-top:30vh;
+   text-align:center;
+   margin-top:30vh;
+   margin-right:0px;
+
+   ${mediaquery.under1280}
 `;
 
 function Landing({ strings }) {

@@ -3,35 +3,36 @@ import React from "react";
 import { css } from "@emotion/react";
 import CustomGridList from "./elements/CustomGridList";
 
+const container = `
+   display:flex
+`;
 const ShortProfile = `
    flex-basis:35%;
    height:80vh;
-   display:flex;
-   flex-direction:column;
-`;
-const container = `
-   display:flex
+   text-align:center;
+   img {
+      border-radius:10px;
+      width:auto;
+      height:50vh;
+      @media only screen and (max-width: 1280px) {
+         height:40vh;
+      }
+   }
+   .profile-list {
+      text-align:left;
+      padding-left:30px;
+      @media only screen and (max-width: 1280px) {
+         padding-left:0px;
+      }
+   }
 `;
 const Stacks = `
    flex-basis:65%;
    height:80vh;
    text-align:center;
-`;
-const ImgStyle = `
-   flex-basis:40%;
-   display:flex;
-   text-align:center;
-   align-items: flex-end;justify-content: center;
-   img {
-      border-radius:10px;
-      width:70%;
-      height:auto;
+   .header {
+      margin-top:0px;
    }
-`;
-const ShortIntroduction = `
-   flex-basis:60%;
-   padding-top:30px;
-   text-align:center;
 `;
 const StackFlex = `
    display:flex;
@@ -59,21 +60,15 @@ function Profile({ data }) {
                css={css`
                   ${ShortProfile}
                `}>
-               <div
-                  css={css`
-                     ${ImgStyle}
-                  `}>
+               <div>
                   <img
                      src={`${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.image}`}
                      alt="error"
                   />
                </div>
-               <div
-                  css={css`
-                     ${ShortIntroduction}
-                  `}>
+               <div>
                   <h4>{data.name}</h4>
-                  <div style={{ textAlign: "left", paddingLeft: "30px" }}>
+                  <div className="profile-list">
                      <ul>
                         {data.aboutme?.map((item, idx) => (
                            <>
@@ -99,7 +94,7 @@ function Profile({ data }) {
                css={css`
                   ${Stacks}
                `}>
-               <h2>Stacks</h2>
+               <h2 className="header">Stacks</h2>
                <div
                   css={css`
                      ${StackFlex}
