@@ -16,7 +16,6 @@ const HeaderStyle = (onMod) => `
    @media only screen and (max-height: 720px) {
       margin-top:5vh;
       margin-bottom:${onMod ? "" : "1"}0vh;
-
    }
 `;
 
@@ -85,9 +84,9 @@ function Works({ list, setOnMod, isAdmin }) {
                ${ListContainer()}
             `}>
             <Grid container spacing={3}>
-               {list.slice(page * 4, page * 4 + 4).map((item, idx) => {
+               {list?.slice(page * 4, page * 4 + 4).map((item, idx) => {
                   return (
-                     <Grid item xs={3} key={idx}>
+                     <Grid item xs={12} sm={6} md={3} key={idx}>
                         <SingleCard
                            item={item}
                            setOnMod={setOnMod}

@@ -39,6 +39,12 @@ const useStyles = makeStyles((theme) => ({
    gridList: {
       width: "90%",
       height: "450px",
+      "@media only screen and (max-height: 750px)": {
+         height: "400px",
+      },
+      "@media only screen and (max-height: 650px)": {
+         height: "350px",
+      },
    },
    icon: {
       color: "rgba(255, 255, 255, 0.54)",

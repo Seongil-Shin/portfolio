@@ -9,26 +9,38 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import scrollVideo from "../assets/scrollVideo.json";
 import { useDispatch, useSelector } from "react-redux";
 import { decrease, increase } from "../modules/pageIndex";
+import { Route, Switch, useHistory } from "react-router";
 
 const CurrntPageStyle = (isCur) =>
    ` z-index:${isCur ? 1 : -1};
    opacity:${isCur ? "1" : "0"}; 
    transition: opacity 0.5s linear 0s`;
 
-const PageChangeContainer = () => `
-   position:relative;
-   top: 85vh;
+const PageChangeContainer = (page, isMobile) => `
+   position:absolute;
+   bottom:10px;
    width:100%; 
    height: 10vh;
    text-align:center;
-   line-height:100px;
+   line-height:10vh;
    z-index:10;
+   /*
+   ${
+      isMobile &&
+      `top:
+      ${page !== 1 ? (page !== 2 ? `` : "200vh") : `100vh`}
+   ;`
+   }*/
 `;
 const ScrollVideoStyle = (showScroll) =>
    `opacity:${showScroll ? 0.5 : 0}; 
    width:100px;
    height: 10vh;
-   transition: opacity 1s linear 0s`;
+   transition: opacity 1s linear 0s
+   :hover {
+      cursor:pointer;
+   }
+   `;
 const PageChangeLeft = () => `
    position:absolute;
    left:50px;
@@ -44,11 +56,15 @@ const PageChangeRight = () => `
    }
 `;
 
+const paths = ["/", "/profile", "/projects", "/contact"];
+
 function Home() {
    const [showScroll, setShowScroll] = useState(true);
    const [touchLast, setTouchLast] = useState(false);
    const curPage = useSelector(({ pageIndex }) => pageIndex);
    const dispatch = useDispatch();
+   const history = useHistory();
+
    useEffect(() => {
       let canEnter = true;
       let transitionStart = false;
@@ -59,6 +75,7 @@ function Home() {
          }
       };
       const handleWheelEvent = (e) => {
+         console.log("scroll1");
          if (!canEnter) {
             return;
          }
@@ -71,6 +88,7 @@ function Home() {
             canEnter = true;
             return;
          }
+         console.log("scroll2");
          if (e.wheelDeltaY < 0) {
             dispatch(increase());
             setShowScroll(false);
@@ -102,10 +120,15 @@ function Home() {
    }, [dispatch]);
 
    useEffect(() => {
+      if (window.innerWidth < 1280) {
+         setTouchLast(true);
+      }
       if (curPage >= 3) {
          setTouchLast(true);
       }
-   }, [curPage]);
+
+      setTimeout(() => history.push(paths[curPage]), 600);
+   }, [curPage, history]);
 
    const handlePageChangeClick = (offset) => {
       if (offset < 0) {
@@ -117,37 +140,49 @@ function Home() {
 
    return (
       <div>
+         <Route exact path="/">
+            <div
+               className="MainPage Landing"
+               css={css`
+                  ${CurrntPageStyle(curPage === 0)}
+               `}>
+               <LandingContainer />
+            </div>
+         </Route>
+
+         <Route exact path="/profile">
+            <div
+               className="MainPage"
+               css={css`
+                  ${CurrntPageStyle(curPage === 1)}
+               `}>
+               <ProfileContainer />
+            </div>
+         </Route>
+
+         <Route exact path="/projects">
+            <div
+               className="MainPage"
+               css={css`
+                  ${CurrntPageStyle(curPage === 2)}
+               `}>
+               <WorksContainer />
+            </div>
+         </Route>
+
+         <Route exact path="/contact">
+            <div
+               className="MainPage"
+               css={css`
+                  ${CurrntPageStyle(curPage === 3)}
+               `}>
+               <ContactContainer />
+            </div>
+         </Route>
+
          <div
-            className="MainPage Landing"
             css={css`
-               ${CurrntPageStyle(curPage === 0)}
-            `}>
-            <LandingContainer />
-         </div>
-         <div
-            className="MainPage"
-            css={css`
-               ${CurrntPageStyle(curPage === 1)}
-            `}>
-            <ProfileContainer />
-         </div>
-         <div
-            className="MainPage"
-            css={css`
-               ${CurrntPageStyle(curPage === 2)}
-            `}>
-            <WorksContainer />
-         </div>
-         <div
-            className="MainPage"
-            css={css`
-               ${CurrntPageStyle(curPage === 3)}
-            `}>
-            <ContactContainer />
-         </div>
-         <div
-            css={css`
-               ${PageChangeContainer()}
+               ${PageChangeContainer(curPage, true)}
             `}>
             {" "}
             {!touchLast ? (
@@ -170,7 +205,7 @@ function Home() {
                         css={css`
                            ${PageChangeLeft()}
                         `}>
-                        Left
+                        Prev
                      </span>
                   )}
                   {curPage !== 3 && (
@@ -179,7 +214,7 @@ function Home() {
                         css={css`
                            ${PageChangeRight()}
                         `}>
-                        Right
+                        Next
                      </span>
                   )}
                </>

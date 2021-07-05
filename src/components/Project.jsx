@@ -53,7 +53,6 @@ const goBackContainer = `
 
 function Project({ data }) {
    const history = useHistory();
-   console.log(data.detail);
    return (
       <>
          <h1
