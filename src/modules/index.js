@@ -5,6 +5,7 @@ import snackBar from "./snackBar";
 import auth from "./auth";
 import profile, { profileSaga } from "./profile";
 import projects, { projectsSaga } from "./projects";
+import isMobileReducer from "./isMobile";
 
 const rootReducer = combineReducers({
    pageIndex,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
    auth,
    profile,
    projects,
+   isMobileReducer,
 });
 
 export function* rootSaga() {

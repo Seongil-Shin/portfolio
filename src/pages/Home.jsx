@@ -9,7 +9,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import scrollVideo from "../assets/scrollVideo.json";
 import { useDispatch, useSelector } from "react-redux";
 import { decrease, increase } from "../modules/pageIndex";
-import { Route, Switch, useHistory } from "react-router";
+import { Route, useHistory } from "react-router";
 
 const CurrntPageStyle = (isCur) =>
    ` z-index:${isCur ? 1 : -1};
@@ -24,13 +24,16 @@ const PageChangeContainer = (page, isMobile) => `
    text-align:center;
    line-height:10vh;
    z-index:10;
-   /*
-   ${
-      isMobile &&
-      `top:
-      ${page !== 1 ? (page !== 2 ? `` : "200vh") : `100vh`}
-   ;`
-   }*/
+
+   @media only screen and (max-width:767px) {
+      ${
+         page === 1 &&
+         `position:relative; top:${600 + (window.innerWidth / 2) * 1.3 + 50}px;`
+      }
+   }
+   @media only screen and (max-width:599px) {
+      ${page === 2 && "position:relative; top:1600px;"}
+   }
 `;
 const ScrollVideoStyle = (showScroll) =>
    `opacity:${showScroll ? 0.5 : 0}; 
@@ -63,6 +66,9 @@ function Home() {
    const [touchLast, setTouchLast] = useState(false);
    const curPage = useSelector(({ pageIndex }) => pageIndex);
    const dispatch = useDispatch();
+   const isMobile = useSelector(
+      ({ isMobileReducer }) => isMobileReducer.isMobile
+   );
    const history = useHistory();
 
    useEffect(() => {
@@ -75,7 +81,6 @@ function Home() {
          }
       };
       const handleWheelEvent = (e) => {
-         console.log("scroll1");
          if (!canEnter) {
             return;
          }
@@ -88,7 +93,6 @@ function Home() {
             canEnter = true;
             return;
          }
-         console.log("scroll2");
          if (e.wheelDeltaY < 0) {
             dispatch(increase());
             setShowScroll(false);
@@ -182,7 +186,7 @@ function Home() {
 
          <div
             css={css`
-               ${PageChangeContainer(curPage, true)}
+               ${PageChangeContainer(curPage, isMobile)}
             `}>
             {" "}
             {!touchLast ? (

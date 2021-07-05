@@ -7,12 +7,16 @@ import SingleCard from "./elements/SingleCard";
 import Pagination from "@material-ui/lab/Pagination";
 import { Button } from "@material-ui/core";
 
-const Container = () => `text-align:center`;
+const Container = () => `text-align:center;`;
 
 const HeaderStyle = (onMod) => `
     margin-top:10vh;
     margin-bottom:${onMod ? "" : "1"}5vh;
     
+   @media only screen and (max-width: 959px) {
+      margin-top:5vh;
+      margin-bottom:${onMod ? "" : "1"}0vh;
+   }
    @media only screen and (max-height: 720px) {
       margin-top:5vh;
       margin-bottom:${onMod ? "" : "1"}0vh;
