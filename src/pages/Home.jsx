@@ -36,7 +36,7 @@ const PageChangeContainer = (page, isMobile) => `
    }
 `;
 const ScrollVideoStyle = (showScroll) =>
-   `opacity:${showScroll ? 0.5 : 0}; 
+   `opacity:${showScroll ? 0.7 : 0}; 
    width:100px;
    height: 10vh;
    transition: opacity 1s linear 0s
@@ -189,18 +189,22 @@ function Home() {
                ${PageChangeContainer(curPage, isMobile)}
             `}>
             {" "}
-            {!touchLast ? (
-               <Player
-                  src={scrollVideo}
-                  speed="0.9"
-                  css={css`
-                     ${ScrollVideoStyle(showScroll)}
-                  `}
-                  renderer="svg"
-                  controls
-                  loop
-                  autoplay
-               />
+            {!isMobile ? (
+               !touchLast ? (
+                  <Player
+                     src={scrollVideo}
+                     speed="0.9"
+                     css={css`
+                        ${ScrollVideoStyle(showScroll)}
+                     `}
+                     renderer="svg"
+                     controls
+                     loop
+                     autoplay
+                  />
+               ) : (
+                  <></>
+               )
             ) : (
                <>
                   {curPage !== 0 && (
