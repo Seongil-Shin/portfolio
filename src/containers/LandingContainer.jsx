@@ -20,7 +20,7 @@ function LandingContainer() {
                      winWidth -= 32 * i.length + 4;
                      if (winWidth < 0) {
                         line[idx] = "<br />" + line[idx];
-                        winWidth = window.innerWidth;
+                        winWidth = window.innerWidth - (32 * i.length + 4);
                      }
                      idx++;
                   }
@@ -34,7 +34,6 @@ function LandingContainer() {
       getData();
    }, []);
 
-   console.log(strings);
    return <Landing strings={strings} />;
 }
 export default LandingContainer;

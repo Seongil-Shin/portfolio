@@ -85,7 +85,13 @@ function Home() {
             return;
          }
          canEnter = false;
-         const className = e.path[0].className;
+         let className = null;
+         console.log(e);
+         if (e.path) {
+            className = e.path[0].className;
+         } else {
+            className = e.target.className;
+         }
          if (
             typeof className === "string" &&
             className.includes("MuiGridList")
@@ -93,7 +99,7 @@ function Home() {
             canEnter = true;
             return;
          }
-         if (e.wheelDeltaY < 0) {
+         if (e.wheelDeltaY < 0 || e.deltaY > 0) {
             dispatch(increase());
             setShowScroll(false);
             setTimeout(checkIsTransitioning, 50);
