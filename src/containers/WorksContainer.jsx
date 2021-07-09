@@ -12,6 +12,8 @@ function WorksContainer() {
    useEffect(() => {
       setList(projects);
    }, [projects]);
+
+   console.log(list);
    return <Works list={list} />;
 }
 export default WorksContainer;

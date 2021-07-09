@@ -24,7 +24,7 @@ export function* projectsSaga() {
    yield takeLatest(GET_PROJECT, getProjects);
 }
 
-const initialState = {};
+const initialState = [];
 
 export default function projects(state = initialState, action) {
    switch (action.type) {

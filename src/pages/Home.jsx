@@ -11,10 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { decrease, increase } from "../modules/pageIndex";
 import { Route, useHistory } from "react-router";
 
-const CurrntPageStyle = (isCur) =>
+const CurrntPageStyle = (isCur, curOpacity) =>
    ` z-index:${isCur ? 1 : -1};
-   opacity:${isCur ? "1" : "0"}; 
-   transition: opacity 0.5s linear 0s`;
+   opacity:${isCur ? curOpacity : "0"}; 
+   transition: opacity 0.5s linear 0s
+   `;
 
 const PageChangeContainer = (page, isMobile) => `
    position:absolute;
@@ -70,6 +71,7 @@ function Home() {
       ({ isMobileReducer }) => isMobileReducer.isMobile
    );
    const history = useHistory();
+   const [curOpacity, setCurOpacity] = useState(0);
 
    useEffect(() => {
       let canEnter = true;
@@ -85,13 +87,8 @@ function Home() {
             return;
          }
          canEnter = false;
-         let className = null;
-         console.log(e);
-         if (e.path) {
-            className = e.path[0].className;
-         } else {
-            className = e.target.className;
-         }
+         let className = e.path ? e.path[0].className : e.target.className;
+
          if (
             typeof className === "string" &&
             className.includes("MuiGridList")
@@ -99,24 +96,23 @@ function Home() {
             canEnter = true;
             return;
          }
+
          if (e.wheelDeltaY < 0 || e.deltaY > 0) {
             dispatch(increase());
-            setShowScroll(false);
             setTimeout(checkIsTransitioning, 50);
          } else {
             dispatch(decrease());
-            setShowScroll(false);
             setTimeout(checkIsTransitioning, 50);
          }
       };
 
       const handleTransitionStart = () => {
+         canEnter = false;
          transitionStart = true;
       };
       const handleTransitionEnd = () => {
          canEnter = true;
          transitionStart = false;
-         setShowScroll(true);
       };
 
       window.addEventListener("wheel", handleWheelEvent);
@@ -136,8 +132,11 @@ function Home() {
       if (curPage >= 3) {
          setTouchLast(true);
       }
-
-      setTimeout(() => history.push(paths[curPage]), 600);
+      setCurOpacity(0);
+      setTimeout(() => {
+         history.push(paths[curPage]);
+         setTimeout(() => setCurOpacity(1), 5);
+      }, 600);
    }, [curPage, history]);
 
    const handlePageChangeClick = (offset) => {
@@ -154,7 +153,7 @@ function Home() {
             <div
                className="MainPage Landing"
                css={css`
-                  ${CurrntPageStyle(curPage === 0)}
+                  ${CurrntPageStyle(curPage === 0, curOpacity)}
                `}>
                <LandingContainer />
             </div>
@@ -164,7 +163,7 @@ function Home() {
             <div
                className="MainPage"
                css={css`
-                  ${CurrntPageStyle(curPage === 1)}
+                  ${CurrntPageStyle(curPage === 1, curOpacity)}
                `}>
                <ProfileContainer />
             </div>
@@ -174,7 +173,7 @@ function Home() {
             <div
                className="MainPage"
                css={css`
-                  ${CurrntPageStyle(curPage === 2)}
+                  ${CurrntPageStyle(curPage === 2, curOpacity)}
                `}>
                <WorksContainer />
             </div>
@@ -184,7 +183,7 @@ function Home() {
             <div
                className="MainPage"
                css={css`
-                  ${CurrntPageStyle(curPage === 3)}
+                  ${CurrntPageStyle(curPage === 3, curOpacity)}
                `}>
                <ContactContainer />
             </div>
