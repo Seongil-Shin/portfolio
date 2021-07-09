@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
       flexWrap: "wrap",
       justifyContent: "space-around",
       overflow: "hidden",
+      scrollbarWidth: "none",
+      scrollbarColor: `${palette.thatch} ${palette.mushroom}`,
       /* width */
       "& ::-webkit-scrollbar": {
          width: "5px",
