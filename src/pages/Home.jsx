@@ -107,7 +107,6 @@ function Home() {
       };
 
       const handleTransitionStart = () => {
-         canEnter = false;
          transitionStart = true;
       };
       const handleTransitionEnd = () => {

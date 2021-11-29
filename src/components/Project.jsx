@@ -15,11 +15,12 @@ const imageContainer = `
     flex-basis:40%;
     padding:10px;
     height:80vh;
+    text-align:center;
 `;
 const image = ` 
+   position:relative;
     border-radius:10px;
     height:70%;
-    transform:translateY(10%);
 `;
 const detailContainer = `
     flex-basis:60%;
@@ -29,8 +30,14 @@ const detailContainer = `
 `;
 
 const ImgStyle = `
-   height: auto;
-   width: 100%;
+   position:absolute;
+   top:50%;
+   left:50%;
+   transform:translate(-50%,-50%);
+
+   max-height: 100%;
+   max-width:100%;
+   object-fit: cover;
 `;
 const containerText = `
     margin : 50px 30px;
