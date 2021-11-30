@@ -193,8 +193,8 @@ function Home() {
                ${PageChangeContainer(curPage, isMobile)}
             `}>
             {" "}
-            {!isMobile ? (
-               !touchLast ? (
+            {(!isMobile && !touchLast && curPage !==2) ? (
+               
                   <Player
                      src={scrollVideo}
                      speed="0.9"
@@ -206,9 +206,6 @@ function Home() {
                      loop
                      autoplay
                   />
-               ) : (
-                  <></>
-               )
             ) : (
                <>
                   {curPage !== 0 && (
