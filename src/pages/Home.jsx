@@ -193,19 +193,18 @@ function Home() {
                ${PageChangeContainer(curPage, isMobile)}
             `}>
             {" "}
-            {(!isMobile && !touchLast && curPage !==2) ? (
-               
-                  <Player
-                     src={scrollVideo}
-                     speed="0.9"
-                     css={css`
-                        ${ScrollVideoStyle(showScroll)}
-                     `}
-                     renderer="svg"
-                     controls
-                     loop
-                     autoplay
-                  />
+            {!isMobile && !touchLast && curPage !== 2 ? (
+               <Player
+                  src={scrollVideo}
+                  speed="0.9"
+                  css={css`
+                     ${ScrollVideoStyle(showScroll)}
+                  `}
+                  renderer="svg"
+                  controls
+                  loop
+                  autoplay
+               />
             ) : (
                <>
                   {curPage !== 0 && (
