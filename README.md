@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# 포트폴리오 사이트
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+-  제 자신을 알리기 위한 개인 포트폴리오 사이트입니다.
 
-## Available Scripts
+## Link
 
-In the project directory, you can run:
+https://www.shinseongil.me/
 
-### `yarn start`
+## TechStack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### FrontEnd
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<table><tbody>
+  <tr align="center" valign="middle">
+    <td width="120">
+      <a href="https://reactjs.org" target="_blank"> 
+        <img src="https://blog.kakaocdn.net/dn/bHaDEJ/btqzvJKBRWs/bjGrc9m3naOzIOv6oE0Yz0/img.png" alt="React" width="160" height="120"/> 
+      </a>
+    </td>
+    <td width="120">
+      <a href="https://redux.js.org" target="_blank"> 
+        <img src="https://media.vlpt.us/images/sonofhuman20/post/7c171f4f-2b5c-45b8-928c-21ba4618c769/redux.png" alt="Redux" width="160" height="120"/> 
+      </a>
+  </tr>
+</tbody></table>
 
-### `yarn test`
+### BackEnd
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<table><tbody>
+  <tr align="center" valign="middle">
+    <td width="120">
+      <a href="https://aws.amazon.com/ko/amplify/?nc2=h_ql_prod_mo_awsa" target="_blank"> 
+        <img src="https://ichi.pro/assets/images/max/724/1*BeWKmsetwx57wtMXRNaV3g.png" alt="Amplify" width="120" height="120"/> 
+      </a><br>
+        AWS amplify
+    </td>
+    <td width="120">
+      <a href="https://graphql.org/" target="_blank"> 
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/GraphQL_Logo.svg/1200px-GraphQL_Logo.svg.png" alt="GraphQL" width="120" height="120"/> 
+      </a><br>
+          GraphQL
+  </tr>
+</tbody></table>
 
-### `yarn build`
+## UI
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![YeS1toKiD55vDuJiatZBKQievsqBc4CA](../assets/img/README/144734231-cf83a7f8-6a1e-44fb-b0f7-6217308e6715.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![image](../assets/img/README/144734229-e16c1744-702b-4867-9ab9-9c91c1717967.png)
