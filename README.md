@@ -30,7 +30,7 @@ https://www.shinseongil.me/
   <tr align="center" valign="middle">
     <td width="120">
       <a href="https://aws.amazon.com/ko/amplify/?nc2=h_ql_prod_mo_awsa" target="_blank"> 
-        <img src="https://ichi.pro/assets/images/max/724/1*BeWKmsetwx57wtMXRNaV3g.png" alt="Amplify" width="120" height="120"/> 
+        <img src="https://user-images.githubusercontent.com/31322144/144734412-8f6fc5a3-233e-42f7-a09f-9ea58d4dee6c.png" alt="Amplify" width="120" height="120"/> 
       </a><br>
         AWS amplify
     </td>
@@ -42,8 +42,9 @@ https://www.shinseongil.me/
   </tr>
 </tbody></table>
 
+
 ## UI
 
-![YeS1toKiD55vDuJiatZBKQievsqBc4CA](../assets/img/README/144734231-cf83a7f8-6a1e-44fb-b0f7-6217308e6715.png)
+![YeS1toKiD55vDuJiatZBKQievsqBc4CA](https://user-images.githubusercontent.com/31322144/144734231-cf83a7f8-6a1e-44fb-b0f7-6217308e6715.png)
 
-![image](../assets/img/README/144734229-e16c1744-702b-4867-9ab9-9c91c1717967.png)
+![YeS1toKiD55vDuJiatZBKQievsqBc4CA](https://user-images.githubusercontent.com/31322144/144734229-e16c1744-702b-4867-9ab9-9c91c1717967.png)
