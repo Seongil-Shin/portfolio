@@ -122,7 +122,7 @@ export const getProject = /* GraphQL */ `
       title
       summary
       detail
-      image
+      images
       github
       createdAt
       updatedAt
@@ -141,7 +141,7 @@ export const listProjects = /* GraphQL */ `
         title
         summary
         detail
-        image
+        images
         github
         createdAt
         updatedAt

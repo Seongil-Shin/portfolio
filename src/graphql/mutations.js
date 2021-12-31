@@ -176,7 +176,7 @@ export const createProject = /* GraphQL */ `
       title
       summary
       detail
-      image
+      images
       github
       createdAt
       updatedAt
@@ -193,7 +193,7 @@ export const updateProject = /* GraphQL */ `
       title
       summary
       detail
-      image
+      images
       github
       createdAt
       updatedAt
@@ -210,7 +210,7 @@ export const deleteProject = /* GraphQL */ `
       title
       summary
       detail
-      image
+      images
       github
       createdAt
       updatedAt

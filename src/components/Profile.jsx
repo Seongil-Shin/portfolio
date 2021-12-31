@@ -50,7 +50,6 @@ const StackEtc = `
 function Profile({ data }) {
    return (
       <>
-         {" "}
          <h2>프로필</h2>
          <div
             css={css`
@@ -71,10 +70,10 @@ function Profile({ data }) {
                   <div className="profile-list">
                      <ul>
                         {data.aboutme?.map((item, idx) => (
-                           <>
-                              <li key={`list-${idx}`}>{item?.line}</li>
+                           <span key={`list-${idx}`}>
+                              <li>{item?.line}</li>
                               <br />
-                           </>
+                           </span>
                         ))}
                         <li>
                            깃허브 :{" "}

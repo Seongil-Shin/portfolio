@@ -11,6 +11,9 @@ function ProjectsModification({
    mutate,
    onGoBack,
    user,
+   onAddImage,
+   onDeleteImage,
+   onChangeImage,
 }) {
    return (
       <div>
@@ -20,6 +23,9 @@ function ProjectsModification({
                onChangeData={onChangeData}
                mutate={mutate}
                onGoBack={onGoBack}
+               onAddImage={onAddImage}
+               onDeleteImage={onDeleteImage}
+               onChangeImage={onChangeImage}
             />
          ) : (
             <Works list={list} setOnMod={setOnMod} isAdmin={user} />

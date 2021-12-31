@@ -1,22 +1,17 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { css } from "@emotion/react";
 import { Button, makeStyles, TextField } from "@material-ui/core";
-import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import palette from "../lib/styles/palette";
+import ImageGallery from "react-image-gallery";
 
 const container = `
     display: flex;
     flex-basis:35%;
 `;
-const imageContainer = `
-    flex-basis:35%;
-    padding:10px;
-    height:90vh;
-`;
-const image = ` 
-    border-radius:10px;
-    height:70%;
+const galleryContainer = `
+    flex-basis:40%;
+    height:80vh;
 `;
 const detailContainer = `
     flex-basis:65%;
@@ -25,9 +20,13 @@ const detailContainer = `
     box-sizing: border-box;
 `;
 
+const imageInnerContainer = `
+   background-color:#222222;
+`;
 const ImgStyle = `
-   --height: auto;
-   --width: 100%;
+   max-width:100%;
+   height:50vh;
+   object-fit:contain;
 `;
 const containerText = `
     margin : 50px 30px;
@@ -45,14 +44,69 @@ const goBackContainer = `
       color:white;
    }
 `;
+
+const imageControllButtonsContainer = `
+   text-align:center;
+`;
+
 const useStyles = makeStyles(() => ({
    button: {
       margin: "0px auto",
    },
 }));
 
-function ProjectMutation({ data, mutate, onChangeData, onGoBack }) {
+function ProjectMutation({
+   data,
+   mutate,
+   onChangeData,
+   onGoBack,
+   onAddImage,
+   onDeleteImage,
+   onChangeImage,
+}) {
+   const galleryRef = useRef();
    const classes = useStyles();
+   const [images, setImages] = useState([]);
+
+   useEffect(() => {
+      const imageList = [];
+      if (
+         data.images &&
+         typeof data.images === "object" &&
+         Array.isArray(data.images)
+      ) {
+         for (let i = 0; i < data.images.length; i++) {
+            if (typeof data.images[i] === "object") {
+               imageList.push({
+                  original: URL.createObjectURL(data.images[i]),
+               });
+            } else {
+               imageList.push({
+                  original: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.images[i]}`,
+               });
+            }
+         }
+      }
+      setImages(imageList);
+   }, [data.images]);
+
+   const renderItem = (item) => {
+      return (
+         <div
+            css={css`
+               ${imageInnerContainer}
+            `}>
+            <img
+               src={item.original}
+               alt="error"
+               css={css`
+                  ${ImgStyle}
+               `}
+            />
+         </div>
+      );
+   };
+
    return (
       <div
          css={css`
@@ -60,55 +114,72 @@ function ProjectMutation({ data, mutate, onChangeData, onGoBack }) {
          `}>
          <div
             css={css`
-               ${imageContainer}
+               ${galleryContainer}
             `}>
+            {data?.images?.length > 0 && (
+               <ImageGallery
+                  ref={galleryRef}
+                  items={images}
+                  renderItem={renderItem}
+                  showThumbnails={false}
+               />
+            )}
             <div
                css={css`
-                  ${image}
+                  ${imageControllButtonsContainer}
                `}>
-               {data?.image &&
-                  (typeof data.image === "object" ? (
-                     <img
-                        id="project-image"
-                        src={URL.createObjectURL(data.image)}
-                        width="100%"
-                        height="auto"
-                        alt="error"
-                     />
-                  ) : (
-                     <AmplifyS3Image
-                        imgKey={data.image}
-                        css={css`
-                           ${ImgStyle}
-                        `}
-                     />
-                  ))}
-            </div>
-            <label key="image_upload">
-               <input
-                  type="file"
-                  accept="image/*"
-                  style={{ display: "none" }}
-                  onChange={(e) => onChangeData(e, "image")}
-               />
-               <Button
-                  variant="outlined"
-                  color="primary"
-                  className={classes.button}
-                  component="span">
-                  추가/수정
-               </Button>
-            </label>
+               <label key="image_upload">
+                  <input
+                     type="file"
+                     accept="image/*"
+                     style={{ display: "none" }}
+                     onChange={(e) => onAddImage(e)}
+                  />
+                  <Button
+                     variant="contained"
+                     color="primary"
+                     className={classes.button}
+                     component="span">
+                     추가
+                  </Button>
+               </label>
 
-            {data?.image && (
-               <Button
-                  variant="outlined"
-                  color="secondary"
-                  className={classes.button}
-                  onClick={() => onChangeData(null, "image")}>
-                  삭제
-               </Button>
-            )}
+               {data?.images?.length > 0 && (
+                  <label key="image_change">
+                     <input
+                        type="file"
+                        accept="image/*"
+                        style={{ display: "none" }}
+                        onChange={(e) =>
+                           onChangeImage(
+                              e,
+                              galleryRef.current?.getCurrentIndex()
+                           )
+                        }
+                     />
+                     <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        component="span">
+                        변경
+                     </Button>
+                  </label>
+               )}
+               {data?.images?.length > 0 && (
+                  <Button
+                     variant="contained"
+                     color="secondary"
+                     className={classes.button}
+                     onClick={() => {
+                        if (window.confirm("삭제하시겠습니까?")) {
+                           onDeleteImage(galleryRef.current?.getCurrentIndex());
+                        }
+                     }}>
+                     삭제
+                  </Button>
+               )}
+            </div>
          </div>
          <div
             css={css`

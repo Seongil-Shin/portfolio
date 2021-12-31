@@ -44,27 +44,57 @@ function ProjectsModContainer({ user }) {
       }
    }, [onMod]);
 
-   const onChangeData = (e, type) => {
-      if (type === "image") {
-         if (e === null) {
-            setData((prev) => ({
-               ...prev,
-               image: null,
-               imageKey:
-                  typeof prev.image === "string" ? prev.image : prev.imageKey,
-            }));
-         } else {
-            setData((prev) => ({
-               ...prev,
-               image: e.target.files[0],
-               imageKey:
-                  typeof prev.image === "string" ? prev.image : prev.imageKey,
-            }));
-         }
+   const onChangeData = (e) => {
+      setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+   };
+
+   const onAddImage = (e) => {
+      setData((prev) => ({
+         ...prev,
+         images: prev.images
+            ? prev.images.concat([e.target.files[0]])
+            : [e.target.files[0]],
+      }));
+   };
+
+   const onDeleteImage = (index) => {
+      if (typeof data.images[index] === "object") {
+         setData((prev) => ({
+            ...prev,
+            images: prev.images.filter((_, i) => i !== index),
+         }));
       } else {
-         setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+         setData((prev) => ({
+            ...prev,
+            images: prev.images.filter((_, i) => i !== index),
+            imageKeys: prev.imageKeys
+               ? prev.imageKeys.concat(
+                    prev.images.filter((_, i) => i === index)
+                 )
+               : prev.images.filter((_, i) => i === index),
+         }));
       }
    };
+
+   const onChangeImage = (e, index) => {
+      if (typeof data.images[index] === "string") {
+         setData((prev) => ({
+            ...prev,
+            imageKeys: prev.imageKeys
+               ? prev.imageKeys.concat(
+                    prev.images.filter((_, i) => i === index)
+                 )
+               : prev.images.filter((_, i) => i === index),
+         }));
+      }
+      setData((prev) => ({
+         ...prev,
+         images: prev.images.map((image, i) =>
+            i === index ? e.target.files[0] : image
+         ),
+      }));
+   };
+
    const afterMutate = () => {
       setRefresh((prev) => prev + 1);
       setData({});
@@ -98,6 +128,9 @@ function ProjectsModContainer({ user }) {
          data={data}
          mutate={mutate}
          onGoBack={afterMutate}
+         onAddImage={onAddImage}
+         onDeleteImage={onDeleteImage}
+         onChangeImage={onChangeImage}
          user={user}
       />
    );

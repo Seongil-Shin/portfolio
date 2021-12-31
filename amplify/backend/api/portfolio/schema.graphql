@@ -6,7 +6,7 @@ type Landing @model {
 type Profile @model {
    id: ID!
    name: String!
-   image: [String]!
+   image: String!
 }
 type ProfileAboutme @model {
    id: ID!
@@ -24,6 +24,6 @@ type Project @model {
    title: String!
    summary: String!
    detail: String!
-   image: String!
+   images: [String]!
    github: String!
 }

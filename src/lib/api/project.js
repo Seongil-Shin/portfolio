@@ -20,12 +20,16 @@ export async function uploadImg(file) {
 }
 
 export const createProjectFunc = async (data) => {
-   const res = await uploadImg(data.image);
+   let imageKeys = [];
+   for (let i = 0; i < data.images?.length; i++) {
+      const res = await uploadImg(data.images[i]);
+      imageKeys.push(res.key);
+   }
    const obj = {
       title: data.title,
       detail: data.detail,
       summary: data.summary,
-      image: res.key,
+      images: imageKeys,
       github: data.github,
    };
    try {
@@ -55,21 +59,27 @@ export const updateProjectFunc = async (data) => {
          title: data.title,
          detail: data.detail,
          summary: data.summary,
-         image: data.image,
+         images: data.images,
          github: data.github,
       };
-      if (typeof data.image === "object") {
-         await Storage.remove(data.imageKey);
-         const res = await uploadImg(data.image);
-         obj = {
-            ...obj,
-            image: res.key,
-         };
+
+      if (data.imageKeys && Array.isArray(data.imageKeys)) {
+         for (let i = 0; i < data.imageKeys?.length; i++) {
+            Storage.remove(data.imageKeys);
+         }
       }
+      for (let i = 0; i < obj.images?.length; i++) {
+         if (typeof obj.images[i] === "object") {
+            const res = await uploadImg(obj.images[i]);
+            obj.images[i] = res.key;
+         }
+      }
+
       const res = await API.graphql({
          query: updateProject,
          variables: { input: obj },
       });
+
       return res;
    } catch (err) {
       throw err;
@@ -78,7 +88,9 @@ export const updateProjectFunc = async (data) => {
 
 export const DeleteProject = async (data) => {
    try {
-      await Storage.remove(data.image);
+      for (let i = 0; i < data.images?.length; i++) {
+         Storage.remove(data.images[i]);
+      }
       const res = await API.graphql({
          query: deleteProject,
          variables: { input: { id: data.id } },

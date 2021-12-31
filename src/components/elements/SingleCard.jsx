@@ -51,7 +51,7 @@ function SingleCard({ item, setOnMod, isAdmin }) {
       <Card className={classes.root}>
          <CardMedia className={classes.media}>
             <img
-               src={`${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${item.image}`}
+               src={`${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${item.images[0]}`}
                alt="error"
                css={css`
                   ${ImgStyle}
@@ -101,9 +101,14 @@ function SingleCard({ item, setOnMod, isAdmin }) {
                   <Button
                      size="small"
                      className={classes.buttonColor}
-                     onClick={() =>
-                        setOnMod(["delete", { id: item.id, image: item.image }])
-                     }>
+                     onClick={() => {
+                        if (window.confirm("정말 삭제하시겠습니까?")) {
+                           setOnMod([
+                              "delete",
+                              { id: item.id, image: item.image },
+                           ]);
+                        }
+                     }}>
                      삭제
                   </Button>
                </>

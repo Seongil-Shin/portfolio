@@ -37,7 +37,7 @@ const containerText = `
 `;
 const goBackContainer = `
    position:absolute;
-   top:10px;
+   top:0px;
    left:10px;
    button {
       background-color:${palette.thatch};
@@ -57,17 +57,17 @@ function Project({ data }) {
 
    useEffect(() => {
       const imageList = [];
-      if (typeof data.image === "object" && Array.isArray(data.image)) {
-         for (let i = 0; i < data.image.length; i++) {
+      if (typeof data.images === "object" && Array.isArray(data.images)) {
+         for (let i = 0; i < data.images.length; i++) {
             imageList.push({
-               original: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.image[i]}`,
-               thumbnail: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.image[i]}`,
+               original: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.images[i]}`,
+               thumbnail: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.images[i]}`,
             });
          }
       } else {
          imageList.push({
-            original: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.image}`,
-            thumbnail: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.image}`,
+            original: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.images}`,
+            thumbnail: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.images}`,
          });
       }
       setImages(imageList);
