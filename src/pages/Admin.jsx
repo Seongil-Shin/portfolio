@@ -12,7 +12,6 @@ function Admin() {
    const dispatch = useDispatch();
    useEffect(() => {
       onAuthUIStateChange((nextAuthState, authData) => {
-         console.log(nextAuthState);
          if (nextAuthState === "signedin") {
             dispatch(signin());
          } else {

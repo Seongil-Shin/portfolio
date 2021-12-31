@@ -11,10 +11,14 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
-   rootReducer,
-   composeWithDevTools(applyMiddleware(sagaMiddleware, logger))
-);
+const store =
+   process.env.NODE_ENV !== "production"
+      ? createStore(
+           rootReducer,
+           composeWithDevTools(applyMiddleware(sagaMiddleware, logger))
+        )
+      : createStore(rootReducer, applyMiddleware(sagaMiddleware));
+
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(

@@ -1,51 +1,44 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { css } from "@emotion/react";
 import { Button, Divider } from "@material-ui/core";
 import { useHistory } from "react-router";
 import palette from "../lib/styles/palette";
+import ImageGallery from "react-image-gallery";
 
 const title = `
    text-align:center;
 `;
 const container = `
     display: flex;
+    position :relative;
 `;
-const imageContainer = `
+const galleryContainer = `
     flex-basis:40%;
-    padding:10px;
     height:80vh;
-    text-align:center;
-`;
-const image = ` 
-   position:relative;
-    border-radius:10px;
-    height:70%;
 `;
 const detailContainer = `
     flex-basis:60%;
-    height:80vh;
-    padding:50px;
-    box-sizing: border-box;
+    height:40vh;
+    padding:20px;
+    display: flex;
+    align-items: center;
 `;
-
+const imageInnerContainer = `
+   background-color:#222222;
+`;
 const ImgStyle = `
-   position:absolute;
-   top:50%;
-   left:50%;
-   transform:translate(-50%,-50%);
-
-   max-height: 100%;
    max-width:100%;
-   object-fit: cover;
+   height:50vh;
+   object-fit:contain;
 `;
 const containerText = `
-    margin : 50px 30px;
+    margin : 10px 10px;
 `;
 const goBackContainer = `
    position:absolute;
-   bottom:10px;
-   right:10px;
+   top:10px;
+   left:10px;
    button {
       background-color:${palette.thatch};
       color:white;
@@ -59,9 +52,49 @@ const goBackContainer = `
 `;
 
 function Project({ data }) {
+   const [images, setImages] = useState([]);
    const history = useHistory();
+
+   useEffect(() => {
+      const imageList = [];
+      if (typeof data.image === "object" && Array.isArray(data.image)) {
+         for (let i = 0; i < data.image.length; i++) {
+            imageList.push({
+               original: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.image[i]}`,
+               thumbnail: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.image[i]}`,
+            });
+         }
+      } else {
+         imageList.push({
+            original: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.image}`,
+            thumbnail: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.image}`,
+         });
+      }
+      setImages(imageList);
+   }, [data]);
+
+   const renderItem = (item) => {
+      return (
+         <div
+            css={css`
+               ${imageInnerContainer}
+            `}>
+            <img
+               src={item.original}
+               alt="error"
+               css={css`
+                  ${ImgStyle}
+               `}
+            />
+         </div>
+      );
+   };
+
    return (
-      <>
+      <div
+         css={css`
+            ${`position:relative;`}
+         `}>
          <h1
             css={css`
                ${title}
@@ -74,20 +107,13 @@ function Project({ data }) {
             `}>
             <div
                css={css`
-                  ${imageContainer}
+                  ${galleryContainer}
                `}>
-               <div
-                  css={css`
-                     ${image}
-                  `}>
-                  <img
-                     src={`${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.image}`}
-                     alt="error"
-                     css={css`
-                        ${ImgStyle}
-                     `}
-                  />
-               </div>
+               <ImageGallery
+                  items={images}
+                  renderItem={renderItem}
+                  showThumbnails={false}
+               />
             </div>
             <div
                css={css`
@@ -111,17 +137,16 @@ function Project({ data }) {
                         </a>
                      </div>
                   </div>
-
-                  <div
-                     css={css`
-                        ${goBackContainer}
-                     `}>
-                     <Button onClick={() => history.goBack()}>뒤로가기</Button>
-                  </div>
                </div>
             </div>
          </div>
-      </>
+         <div
+            css={css`
+               ${goBackContainer}
+            `}>
+            <Button onClick={() => history.goBack()}>뒤로가기</Button>
+         </div>
+      </div>
    );
 }
 export default Project;
