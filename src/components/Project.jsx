@@ -15,6 +15,7 @@ const container = `
 `;
 const galleryContainer = `
     flex-basis:40%;
+    max-width: 40%;
     height:80vh;
 `;
 const detailContainer = `
@@ -109,11 +110,7 @@ function Project({ data }) {
                css={css`
                   ${galleryContainer}
                `}>
-               <ImageGallery
-                  items={images}
-                  renderItem={renderItem}
-                  showThumbnails={false}
-               />
+               <ImageGallery items={images} renderItem={renderItem} />
             </div>
             <div
                css={css`

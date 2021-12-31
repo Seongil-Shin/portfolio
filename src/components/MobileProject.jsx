@@ -33,8 +33,8 @@ const containerText = `
     margin : 50px 30px;
 `;
 const goBackContainer = `
-   position:absolute;
-   top:0px;
+   position:relative;
+   bottom:20px;
    left:10px;
    button {
       background-color:${palette.thatch};
@@ -52,6 +52,7 @@ function MobileProject({ data }) {
    const [images, setImages] = useState([]);
    const history = useHistory();
 
+   useEffect(() => window.scrollTo(0, 0), []);
    useEffect(() => {
       const imageList = [];
       if (typeof data.images === "object" && Array.isArray(data.images)) {
@@ -109,7 +110,7 @@ function MobileProject({ data }) {
                <ImageGallery
                   items={images}
                   renderItem={renderItem}
-                  showThumbnails={false}
+                  showThumbnails={true}
                />
             </div>
             <div>
@@ -130,13 +131,13 @@ function MobileProject({ data }) {
                      </a>
                   </div>
                </div>
+               <div
+                  css={css`
+                     ${goBackContainer}
+                  `}>
+                  <Button onClick={() => history.goBack()}>뒤로가기</Button>
+               </div>
             </div>
-         </div>
-         <div
-            css={css`
-               ${goBackContainer}
-            `}>
-            <Button onClick={() => history.goBack()}>뒤로가기</Button>
          </div>
       </div>
    );
