@@ -1,9 +1,5 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
-
-@font-face {
-   font-family: "jeju";
-   src: url("./assets/fonts/JejuGothic.ttf");
-}
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 
 html {
    width: 100%;
@@ -38,7 +34,7 @@ body {
    height: 100vh;
    margin: auto;
    color: #32435f;
-   font-family: "jeju";
+   font-family: "Noto Sans KR", sans-serif;
 }
 
 .App-container {

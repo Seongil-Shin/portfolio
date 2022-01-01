@@ -21,7 +21,7 @@ const containerText = `
     margin : 50px 30px;
 `;
 const successMsg = `
-    color: #3f51b5
+    color: #3f51b5;
 `;
 
 function LandingModification({ onChange, strings, success, modify }) {

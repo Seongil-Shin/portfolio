@@ -72,7 +72,6 @@ function Profile({ data }) {
                         {data.aboutme?.map((item, idx) => (
                            <span key={`list-${idx}`}>
                               <li>{item?.line}</li>
-                              <br />
                            </span>
                         ))}
                         <li>

@@ -12,6 +12,7 @@ import {
 import palette from "../../lib/styles/palette";
 import { useHistory } from "react-router";
 import { css } from "@emotion/react";
+import fonts from "../../lib/styles/fonts";
 
 const ImgStyle = `
    height: 150px;
@@ -25,14 +26,14 @@ const useStyles = makeStyles(() => ({
    },
    buttonColor: {
       color: palette.thatch,
-      fontFamily: "jeju",
+      fontFamily: fonts.regular,
    },
    media: {
       width: "100%",
       height: "150px",
    },
    font: {
-      fontFamily: "jeju",
+      fontFamily: fonts.regular,
    },
 }));
 

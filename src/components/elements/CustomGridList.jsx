@@ -5,6 +5,7 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import fonts from "../../lib/styles/fonts";
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: "10px",
       "&:hover .item-bar": {
          opacity: 1,
-         fontFamily: "jeju",
+         fontFamily: fonts.regular,
       },
    },
 }));
