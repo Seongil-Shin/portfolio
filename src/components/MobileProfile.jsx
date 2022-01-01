@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { useEffect } from "react";
 import { css } from "@emotion/react";
 import CustomGridList from "./elements/CustomGridList";
 
@@ -43,6 +43,7 @@ const StackEtc = `
 `;
 
 function MobileProfile({ data }) {
+   useEffect(() => window.scrollTo(0, 0), []);
    return (
       <>
          {" "}

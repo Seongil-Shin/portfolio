@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { Route, Switch } from "react-router";
 import Home from "./pages/Home";
 import "./App.css";

@@ -5,6 +5,7 @@ import { Button, Divider } from "@material-ui/core";
 import { useHistory } from "react-router";
 import palette from "../lib/styles/palette";
 import ImageGallery from "react-image-gallery";
+import ReactMarkdown from "react-markdown";
 
 const container = `
    position:relative;
@@ -28,14 +29,15 @@ const ImgStyle = `
    max-height:50vh;
    object-fit: contain;
 `;
-
+const detailContainer = `
+    height:500px;
+    overflow-y: scroll;
+`;
 const containerText = `
-    margin : 50px 30px;
+    margin : 10px 10px;
 `;
 const goBackContainer = `
-   position:relative;
-   bottom:20px;
-   left:10px;
+   padding:10px;
    button {
       background-color:${palette.thatch};
       color:white;
@@ -99,6 +101,13 @@ function MobileProject({ data }) {
             `}>
             {data.title}
          </h1>
+
+         <div
+            css={css`
+               ${goBackContainer}
+            `}>
+            <Button onClick={() => history.goBack()}>뒤로가기</Button>
+         </div>
          <div
             css={css`
                ${innerContainer}
@@ -113,12 +122,16 @@ function MobileProject({ data }) {
                   showThumbnails={true}
                />
             </div>
-            <div>
+            <div
+               css={css`
+                  ${detailContainer}
+               `}>
                <div
                   css={css`
                      ${containerText}
-                  `}
-                  dangerouslySetInnerHTML={{ __html: data.detail }}></div>
+                  `}>
+                  <ReactMarkdown children={data.detail} />
+               </div>
                <Divider />
                <div
                   css={css`
@@ -130,12 +143,6 @@ function MobileProject({ data }) {
                         {data.github}
                      </a>
                   </div>
-               </div>
-               <div
-                  css={css`
-                     ${goBackContainer}
-                  `}>
-                  <Button onClick={() => history.goBack()}>뒤로가기</Button>
                </div>
             </div>
          </div>

@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { useEffect } from "react";
 import {
    Typography,
    Grid,
@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Contact({ sendEmail, data, onFormChange, errEmail, errName }) {
    const classes = useStyles();
+   useEffect(() => window.scrollTo(0, 0), []);
    return (
       <div
          css={css`

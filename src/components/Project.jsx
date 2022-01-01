@@ -5,25 +5,28 @@ import { Button, Divider } from "@material-ui/core";
 import { useHistory } from "react-router";
 import palette from "../lib/styles/palette";
 import ImageGallery from "react-image-gallery";
+import ReactMarkdown from "react-markdown";
 
 const title = `
    text-align:center;
 `;
 const container = `
+    height: 65vh;
     display: flex;
     position :relative;
+    align-items: center;
 `;
 const galleryContainer = `
-    flex-basis:40%;
-    max-width: 40%;
-    height:80vh;
+    flex-basis:50%;
+    max-width: 50%;
+    height:50vh;
 `;
 const detailContainer = `
-    flex-basis:60%;
-    height:40vh;
+    flex-basis:50%;
+    height:50vh;
     padding:20px;
-    display: flex;
-    align-items: center;
+
+    overflow-y: scroll;
 `;
 const imageInnerContainer = `
    background-color:#222222;
@@ -120,8 +123,9 @@ function Project({ data }) {
                   <div
                      css={css`
                         ${containerText}
-                     `}
-                     dangerouslySetInnerHTML={{ __html: data.detail }}></div>
+                     `}>
+                     <ReactMarkdown children={data.detail} />
+                  </div>
                   <Divider />
                   <div
                      css={css`

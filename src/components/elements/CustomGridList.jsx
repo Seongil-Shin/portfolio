@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
-import palette from "../../lib/styles/palette";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
@@ -14,24 +13,6 @@ const useStyles = makeStyles((theme) => ({
       flexWrap: "wrap",
       justifyContent: "space-around",
       overflow: "hidden",
-      scrollbarWidth: "none",
-      scrollbarColor: `${palette.thatch} ${palette.mushroom}`,
-      /* width */
-      "& ::-webkit-scrollbar": {
-         width: "5px",
-      },
-      /* Track */
-      "& ::-webkit-scrollbar-track": {
-         background: palette.mushroom,
-      },
-      /* Handle */
-      "& ::-webkit-scrollbar-thumb": {
-         background: palette.thatch,
-      },
-      /* Handle on hover */
-      "& ::-webkit-scrollbar-thumb:hover": {
-         background: palette.gunmetal,
-      },
       "& img": {
          width: "100%",
          height: "180px",

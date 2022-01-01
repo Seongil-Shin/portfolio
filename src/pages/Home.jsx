@@ -10,6 +10,7 @@ import scrollVideo from "../assets/scrollVideo.json";
 import { useDispatch, useSelector } from "react-redux";
 import { decrease, increase } from "../modules/pageIndex";
 import { Route, useHistory } from "react-router";
+import palette from "../lib/styles/palette";
 
 const CurrntPageStyle = (isCur, curOpacity) =>
    ` z-index:${isCur ? 1 : -1};
@@ -47,17 +48,37 @@ const ScrollVideoStyle = (showScroll) =>
    `;
 const PageChangeLeft = () => `
    position:absolute;
-   left:50px;
+   left:30px;
+   width:100px;
    &:hover {
       cursor:pointer;
    }
 `;
 const PageChangeRight = () => `
    position:absolute;
-   right:50px;
+   right:30px;
+   width:100px;
+   text-align:right;
    &:hover {
       cursor:pointer;
    }
+`;
+
+const bottomNav = css`
+   position: fixed;
+   bottom: 0px;
+   right: 0px;
+   width: 100vw;
+   height: 30px;
+   z-index: 100;
+   line-height: 30px;
+
+   background-color: ${palette.mushroom};
+`;
+
+const bottomNavOffset = css`
+   width: 10vw;
+   height: 40px;
 `;
 
 const paths = ["/", "/profile", "/projects", "/contact"];
@@ -147,92 +168,99 @@ function Home() {
    };
 
    return (
-      <div>
-         <Route exact path="/">
-            <div
-               className="MainPage Landing"
-               css={css`
-                  ${CurrntPageStyle(curPage === 0, curOpacity)}
-               `}>
-               <LandingContainer />
-            </div>
-         </Route>
+      <>
+         <div>
+            <Route exact path="/">
+               <div
+                  className="MainPage Landing"
+                  css={css`
+                     ${CurrntPageStyle(curPage === 0, curOpacity)}
+                  `}>
+                  <LandingContainer />
+               </div>
+            </Route>
 
-         <Route exact path="/profile">
-            <div
-               className="MainPage"
-               css={css`
-                  ${CurrntPageStyle(curPage === 1, curOpacity)}
-               `}>
-               <ProfileContainer />
-            </div>
-         </Route>
+            <Route exact path="/profile">
+               <div
+                  className="MainPage"
+                  css={css`
+                     ${CurrntPageStyle(curPage === 1, curOpacity)}
+                  `}>
+                  <ProfileContainer />
+               </div>
+            </Route>
 
-         <Route exact path="/projects">
-            <div
-               className="MainPage"
-               css={css`
-                  ${CurrntPageStyle(curPage === 2, curOpacity)}
-               `}>
-               <WorksContainer />
-            </div>
-         </Route>
+            <Route exact path="/projects">
+               <div
+                  className="MainPage"
+                  css={css`
+                     ${CurrntPageStyle(curPage === 2, curOpacity)}
+                  `}>
+                  <WorksContainer />
+                  {isMobile && (
+                     <div
+                        css={css`
+                           ${bottomNavOffset}
+                        `}></div>
+                  )}
+               </div>
+            </Route>
 
-         <Route exact path="/contact">
-            <div
-               className="MainPage"
-               css={css`
-                  ${CurrntPageStyle(curPage === 3, curOpacity)}
-               `}>
-               <ContactContainer />
-            </div>
-         </Route>
+            <Route exact path="/contact">
+               <div
+                  className="MainPage"
+                  css={css`
+                     ${CurrntPageStyle(curPage === 3, curOpacity)}
+                  `}>
+                  <ContactContainer />
+               </div>
+            </Route>
 
-         <div
-            css={css`
-               ${PageChangeContainer(curPage, isMobile)}
-            `}>
-            {" "}
             {!isMobile ? (
-               !touchLast && curPage !== 2 ? (
-                  <Player
-                     src={scrollVideo}
-                     speed="0.9"
-                     css={css`
-                        ${ScrollVideoStyle(showScroll)}
-                     `}
-                     renderer="svg"
-                     controls
-                     loop
-                     autoplay
-                  />
-               ) : (
-                  <></>
-               )
+               <div
+                  css={css`
+                     ${PageChangeContainer(curPage, isMobile)}
+                  `}>
+                  {!touchLast && curPage !== 2 ? (
+                     <Player
+                        src={scrollVideo}
+                        speed="0.9"
+                        css={css`
+                           ${ScrollVideoStyle(showScroll)}
+                        `}
+                        renderer="svg"
+                        controls
+                        loop
+                        autoplay
+                     />
+                  ) : (
+                     <></>
+                  )}
+               </div>
             ) : (
-               <>
-                  {curPage !== 0 && (
-                     <span
-                        onClick={() => handlePageChangeClick(-1)}
-                        css={css`
-                           ${PageChangeLeft()}
-                        `}>
-                        Prev
-                     </span>
-                  )}
-                  {curPage !== 3 && (
-                     <span
-                        onClick={() => handlePageChangeClick(1)}
-                        css={css`
-                           ${PageChangeRight()}
-                        `}>
-                        Next
-                     </span>
-                  )}
-               </>
+               <div
+                  css={css`
+                     ${bottomNav}
+                  `}>
+                  <div
+                     onClick={() => handlePageChangeClick(-1)}
+                     css={css`
+                        ${PageChangeLeft()}
+                     `}>
+                     &lt;
+                  </div>
+
+                  <div
+                     onClick={() => handlePageChangeClick(1)}
+                     css={css`
+                        ${PageChangeRight()}
+                     `}>
+                     &gt;
+                  </div>
+               </div>
             )}
          </div>
-      </div>
+      </>
    );
 }
 export default Home;
