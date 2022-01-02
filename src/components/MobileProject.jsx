@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { css } from "@emotion/react";
 import { Button, Divider } from "@material-ui/core";
 import { useHistory } from "react-router";
 import palette from "../lib/styles/palette";
-import ImageGallery from "react-image-gallery";
 import ReactMarkdown from "react-markdown";
+import ReactImageGallery from "./elements/ReactImageGallery";
 
 const container = `
    position:relative;
@@ -18,16 +18,6 @@ const innerContainer = `
 `;
 const imageContainer = `
     padding:10px;
-`;
-const imageInnerContainer = `
-   background-color:#222222;
-`;
-const ImgStyle = `
-   height: auto;
-   width: 100%;
-   border-radius:10px;
-   max-height:50vh;
-   object-fit: contain;
 `;
 const detailContainer = `
     height:500px;
@@ -51,44 +41,9 @@ const goBackContainer = `
 `;
 
 function MobileProject({ data }) {
-   const [images, setImages] = useState([]);
    const history = useHistory();
 
    useEffect(() => window.scrollTo(0, 0), []);
-   useEffect(() => {
-      const imageList = [];
-      if (typeof data.images === "object" && Array.isArray(data.images)) {
-         for (let i = 0; i < data.images.length; i++) {
-            imageList.push({
-               original: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.images[i]}`,
-               thumbnail: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.images[i]}`,
-            });
-         }
-      } else {
-         imageList.push({
-            original: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.images}`,
-            thumbnail: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.images}`,
-         });
-      }
-      setImages(imageList);
-   }, [data]);
-
-   const renderItem = (item) => {
-      return (
-         <div
-            css={css`
-               ${imageInnerContainer}
-            `}>
-            <img
-               src={item.original}
-               alt="error"
-               css={css`
-                  ${ImgStyle}
-               `}
-            />
-         </div>
-      );
-   };
 
    return (
       <div
@@ -116,11 +71,7 @@ function MobileProject({ data }) {
                css={css`
                   ${imageContainer}
                `}>
-               <ImageGallery
-                  items={images}
-                  renderItem={renderItem}
-                  showThumbnails={true}
-               />
+               <ReactImageGallery images={data.images} isMobile={true} />
             </div>
             <div
                css={css`

@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { css } from "@emotion/react";
 import { Button, Divider } from "@material-ui/core";
 import { useHistory } from "react-router";
 import palette from "../lib/styles/palette";
-import ImageGallery from "react-image-gallery";
 import ReactMarkdown from "react-markdown";
+import ReactImageGallery from "./elements/ReactImageGallery";
 
 const title = `
    text-align:center;
@@ -28,14 +28,6 @@ const detailContainer = `
 
     overflow-y: scroll;
 `;
-const imageInnerContainer = `
-   background-color:#222222;
-`;
-const ImgStyle = `
-   max-width:100%;
-   height:50vh;
-   object-fit:contain;
-`;
 const containerText = `
     margin : 10px 10px;
 `;
@@ -56,43 +48,7 @@ const goBackContainer = `
 `;
 
 function Project({ data }) {
-   const [images, setImages] = useState([]);
    const history = useHistory();
-
-   useEffect(() => {
-      const imageList = [];
-      if (typeof data.images === "object" && Array.isArray(data.images)) {
-         for (let i = 0; i < data.images.length; i++) {
-            imageList.push({
-               original: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.images[i]}`,
-               thumbnail: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.images[i]}`,
-            });
-         }
-      } else {
-         imageList.push({
-            original: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.images}`,
-            thumbnail: `${process.env.REACT_APP_PUBLIC_BUCKET_ADDRESS}${data.images}`,
-         });
-      }
-      setImages(imageList);
-   }, [data]);
-
-   const renderItem = (item) => {
-      return (
-         <div
-            css={css`
-               ${imageInnerContainer}
-            `}>
-            <img
-               src={item.original}
-               alt="error"
-               css={css`
-                  ${ImgStyle}
-               `}
-            />
-         </div>
-      );
-   };
 
    return (
       <div
@@ -113,7 +69,7 @@ function Project({ data }) {
                css={css`
                   ${galleryContainer}
                `}>
-               <ImageGallery items={images} renderItem={renderItem} />
+               <ReactImageGallery images={data.images} isMobile={false} />
             </div>
             <div
                css={css`

@@ -23,13 +23,13 @@ function Landing({ strings }) {
                onInit={(typewriter) => {
                   typewriter
                      .typeString(`<h1>${strings[0]}</h1>`)
-                     .pauseFor(50)
+                     .pauseFor(40)
                      .typeString(`<br/>`)
                      .typeString(`<h1>${strings[1]}</h1>`)
                      .stop()
                      .start();
                }}
-               options={{ cursor: "", delay: 70 }}
+               options={{ cursor: "", delay: 60 }}
             />
          )}
       </div>
