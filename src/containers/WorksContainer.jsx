@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import Works from "../components/Works";
-import { getProjectList } from "../lib/api/project";
 
 function WorksContainer() {
    const [list, setList] = useState([]);
