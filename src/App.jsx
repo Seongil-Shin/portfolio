@@ -25,29 +25,6 @@ function App() {
       if (window.innerWidth < 768) {
          dispatch(isMobile());
       }
-      /*
-      let offsetX = 0,
-         offsetY;
-      const handleStart = (e) => {
-         offsetX = e.changedTouches[0].clientX;
-         offsetY = e.changedTouches[0].clientY;
-      };
-      const handleEnd = (e) => {
-         offsetX -= e.changedTouches[0].clientX;
-         offsetY -= e.changedTouches[0].clientY;
-         if (Math.abs(offsetY) > 50) return;
-         if (offsetX > 50) {
-            console.log("right");
-         } else if (offsetX < -50) {
-            console.log("left");
-         }
-      };
-      window.addEventListener("touchstart", handleStart);
-      window.addEventListener("touchend", handleEnd);
-      return () => {
-         window.removeEventListener("touchstart", handleStart);
-         window.removeEventListener("touchend", handleEnd);
-      };*/
    }, [dispatch]);
 
    useEffect(() => {

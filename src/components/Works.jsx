@@ -7,25 +7,24 @@ import SingleCard from "./elements/SingleCard";
 import Pagination from "@material-ui/lab/Pagination";
 import { Button } from "@material-ui/core";
 
-const Container = () => `text-align:center;`;
+const Container = () => `
+   text-align:center;
+   height:100%;
+   max-height:100%;
+   display:flex;
+   flex-direction:column;
+`;
 
-const HeaderStyle = (onMod) => `
-    margin-top:10vh;
-    margin-bottom:${onMod ? "" : "1"}5vh;
-    
-   @media only screen and (max-width: 959px) {
-      margin-top:5vh;
-      margin-bottom:${onMod ? "" : "1"}0vh;
-   }
-   @media only screen and (max-height: 720px) {
-      margin-top:5vh;
-      margin-bottom:${onMod ? "" : "1"}0vh;
-   }
+const HeaderStyle = () => `
+    margin:0;
+    padding-top:5vh;
+    padding-bottom:5vh;
 `;
 
 const ListContainer = () => `
     width:80%;
     margin:0px auto;
+    flex: 1 1 auto;
 `;
 
 const AddButton = () => `
@@ -46,11 +45,13 @@ const AddButton = () => `
 
 const AlignPage = (length) => `
    width:${(length + 2) * 38}px; 
-   margin : 50px auto 0px auto; `;
+   margin : 0px auto; 
+   z-index:100;`;
 
 const useStyles = makeStyles((theme) => ({
    pagination: {
       color: palette.thatch,
+      zIndex:100,
       "& button": {
          color: palette.thatch,
       },
@@ -71,7 +72,7 @@ function Works({ list, setOnMod, isAdmin }) {
          `}>
          <h2
             css={css`
-               ${HeaderStyle(isAdmin ? true : false)}
+               ${HeaderStyle()}
             `}>
             Projects
          </h2>

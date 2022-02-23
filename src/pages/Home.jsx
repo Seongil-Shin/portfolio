@@ -19,8 +19,8 @@ const CurrntPageStyle = (isCur, curOpacity) =>
    `;
 
 const PageChangeContainer = (page, isMobile) => `
-   position:absolute;
-   bottom:10px;
+   position:fixed;
+   bottom:0;
    width:100%; 
    height: 10vh;
    text-align:center;
@@ -40,6 +40,7 @@ const PageChangeContainer = (page, isMobile) => `
 const ScrollVideoStyle = (showScroll) =>
    `opacity:${showScroll ? 0.7 : 0}; 
    width:100px;
+   margin :0px auto; 
    height: 10vh;
    transition: opacity 1s linear 0s
    :hover {
@@ -73,7 +74,7 @@ const bottomNav = css`
    z-index: 100;
    line-height: 30px;
 
-   background-color: ${palette.mushroom};
+   background-color: rgba(252, 250, 247, 1);
 `;
 
 const bottomNavOffset = css`
