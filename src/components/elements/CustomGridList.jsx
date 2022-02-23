@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
    root: {
       display: "flex",
       position: "relative",
+      flex: "1 1 auto",
       flexWrap: "wrap",
       justifyContent: "space-around",
       "& img": {
@@ -21,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
    },
    gridList: {
       width: "90%",
-      height:"100%"
    },
    icon: {
       color: "rgba(255, 255, 255, 0.54)",

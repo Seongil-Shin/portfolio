@@ -39,6 +39,10 @@ const StackFlex = `
 `;
 const StackFrontEnd = `
    flex-basis:33%;
+   height:100%;
+   max-height:100%;
+   display:flex;
+   flex-direction:column;
 `;
 const StackBackEnd = `
    flex-basis:33%;

@@ -21,6 +21,7 @@ const CurrntPageStyle = (isCur, curOpacity) =>
 const PageChangeContainer = (page, isMobile) => `
    position:fixed;
    bottom:0;
+   left:0;
    width:100%; 
    height: 10vh;
    text-align:center;
