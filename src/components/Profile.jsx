@@ -4,7 +4,14 @@ import { css } from "@emotion/react";
 import CustomGridList from "./elements/CustomGridList";
 
 const container = `
-   display:flex
+   width:100%;
+   height:100%;
+   display:flex;
+   flex-direction:column;
+`;
+const contentContainer = `
+   display: flex;
+   flex : 1 1 auto;
 `;
 const ShortProfile = `
    flex-basis:35%;
@@ -39,6 +46,10 @@ const StackFlex = `
 `;
 const StackFrontEnd = `
    flex-basis:33%;
+   height:100%;
+   max-height:100%;
+   display:flex;
+   flex-direction:column;
 `;
 const StackBackEnd = `
    flex-basis:33%;
@@ -49,11 +60,19 @@ const StackEtc = `
 
 function Profile({ data }) {
    return (
-      <>
-         <h2>프로필</h2>
+      <div
+         css={css`
+            ${container}
+         `}>
+         <h2
+            css={css`
+               height: object-fit;
+            `}>
+            프로필
+         </h2>
          <div
             css={css`
-               ${container}
+               ${contentContainer}
             `}>
             <div
                css={css`
@@ -123,7 +142,7 @@ function Profile({ data }) {
                </div>
             </div>
          </div>
-      </>
+      </div>
    );
 }
 export default Profile;

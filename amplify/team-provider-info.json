@@ -9,18 +9,8 @@
       "UnauthRoleName": "amplify-portfolio-dev-183402-unauthRole",
       "StackName": "amplify-portfolio-dev-183402",
       "StackId": "arn:aws:cloudformation:ap-northeast-2:906554246447:stack/amplify-portfolio-dev-183402/7ce28f60-d598-11eb-9de5-02eb73a0eeae",
-      "AmplifyAppId": "du7f807o356jx"
-    },
-    "categories": {
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "du7f807o356jx",
-          "type": "manual"
-        }
-      },
-      "auth": {
-        "portfolio1ef5eddb": {}
-      }
+      "AmplifyAppId": "du7f807o356jx",
+      "AuthTriggerTemplateURL": ""
     }
   }
 }

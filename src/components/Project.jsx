@@ -7,10 +7,15 @@ import palette from "../lib/styles/palette";
 import ReactMarkdown from "react-markdown";
 import ReactImageGallery from "./elements/ReactImageGallery";
 
+const container = `
+   position:absolute;
+   top:50%;
+   transform:translateY(-50%);
+`;
 const title = `
    text-align:center;
 `;
-const container = `
+const contentContainer = `
     height: 65vh;
     display: flex;
     position :relative;
@@ -53,7 +58,7 @@ function Project({ data }) {
    return (
       <div
          css={css`
-            ${`position:relative;`}
+            ${container}
          `}>
          <h1
             css={css`
@@ -63,7 +68,7 @@ function Project({ data }) {
          </h1>
          <div
             css={css`
-               ${container}
+               ${contentContainer}
             `}>
             <div
                css={css`

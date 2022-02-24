@@ -6,26 +6,43 @@ import palette from "../lib/styles/palette";
 import SingleCard from "./elements/SingleCard";
 import Pagination from "@material-ui/lab/Pagination";
 import { Button } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
-const Container = () => `text-align:center;`;
+const Container = (isMobile) => `
+   display:flex;
+   flex-direction :column;
+   
+   position:absolute;
+   top:50%;
+   transform:translateY(-50%);
 
-const HeaderStyle = (onMod) => `
-    margin-top:10vh;
-    margin-bottom:${onMod ? "" : "1"}5vh;
-    
-   @media only screen and (max-width: 959px) {
-      margin-top:5vh;
-      margin-bottom:${onMod ? "" : "1"}0vh;
+   width:100%;
+   max-height:calc(100% - 40px);
+   padding-bottom:40px;
+   overflow-y:auto;
+   text-align:center;
+   gap:1rem;
+
+   ${
+      isMobile &&
+      `
+      position:relative;
+      top:0;
+      transform:none;
+      `
    }
-   @media only screen and (max-height: 720px) {
-      margin-top:5vh;
-      margin-bottom:${onMod ? "" : "1"}0vh;
-   }
+`;
+
+const HeaderStyle = () => `
+    margin:0;
+    padding-top:5vh;
+    padding-bottom:5vh;
 `;
 
 const ListContainer = () => `
     width:80%;
     margin:0px auto;
+    flex: 1 1 auto;
 `;
 
 const AddButton = () => `
@@ -46,11 +63,14 @@ const AddButton = () => `
 
 const AlignPage = (length) => `
    width:${(length + 2) * 38}px; 
-   margin : 50px auto 0px auto; `;
+   margin : 0px auto; 
+   z-index:100;
+`;
 
 const useStyles = makeStyles((theme) => ({
    pagination: {
       color: palette.thatch,
+      zIndex: 100,
       "& button": {
          color: palette.thatch,
       },
@@ -60,6 +80,9 @@ const useStyles = makeStyles((theme) => ({
 function Works({ list, setOnMod, isAdmin }) {
    const classes = useStyles();
    const [page, setPage] = useState(0);
+   const isMobile = useSelector(
+      ({ isMobileReducer }) => isMobileReducer.isMobile
+   );
 
    const handleChange = (e, n) => {
       setPage(n - 1);
@@ -67,11 +90,11 @@ function Works({ list, setOnMod, isAdmin }) {
    return (
       <div
          css={css`
-            ${Container()}
+            ${Container(isMobile)}
          `}>
          <h2
             css={css`
-               ${HeaderStyle(isAdmin ? true : false)}
+               ${HeaderStyle()}
             `}>
             Projects
          </h2>

@@ -9,6 +9,7 @@ import ReactImageGallery from "./elements/ReactImageGallery";
 
 const container = `
    position:relative;
+   padding-bottom:1rem;
 `;
 const title = `
    text-align:center;
@@ -17,17 +18,13 @@ const innerContainer = `
     width:100%;
 `;
 const imageContainer = `
-    padding:10px;
-`;
-const detailContainer = `
-    height:500px;
-    overflow-y: scroll;
+    padding:0.5rem;
 `;
 const containerText = `
-    margin : 10px 10px;
+    margin : 0.5rem 0.5rem;
 `;
 const goBackContainer = `
-   padding:10px;
+   padding:0.5rem;
    button {
       background-color:${palette.thatch};
       color:white;
@@ -73,10 +70,7 @@ function MobileProject({ data }) {
                `}>
                <ReactImageGallery images={data.images} isMobile={true} />
             </div>
-            <div
-               css={css`
-                  ${detailContainer}
-               `}>
+            <div>
                <div
                   css={css`
                      ${containerText}

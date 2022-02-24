@@ -11,9 +11,9 @@ const useStyles = makeStyles((theme) => ({
    root: {
       display: "flex",
       position: "relative",
+      flex: "1 1 auto",
       flexWrap: "wrap",
       justifyContent: "space-around",
-      overflow: "hidden",
       "& img": {
          width: "100%",
          height: "180px",
@@ -23,12 +23,6 @@ const useStyles = makeStyles((theme) => ({
    gridList: {
       width: "90%",
       height: "450px",
-      "@media only screen and (max-height: 750px)": {
-         height: "400px",
-      },
-      "@media only screen and (max-height: 650px)": {
-         height: "350px",
-      },
    },
    icon: {
       color: "rgba(255, 255, 255, 0.54)",
@@ -54,7 +48,6 @@ export default function CustomGridList({ tileData, deleteStack }) {
 
    return (
       <div className={classes.root}>
-         {" "}
          {tileData && (
             <GridList cellHeight={180} cols={1} className={classes.gridList}>
                {tileData.map((tile, idx) => (

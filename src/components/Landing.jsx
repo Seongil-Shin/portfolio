@@ -5,8 +5,11 @@ import Typewriter from "typewriter-effect";
 import mediaquery from "../lib/styles/mediaquery";
 
 const container = `
+   position:absolute;
+   top:50%;
+   left:50%;
+   transform:translate(-50%, -50%);
    text-align:center;
-   margin-top:30vh;
    margin-right:0px;
 
    ${mediaquery.under1280}
