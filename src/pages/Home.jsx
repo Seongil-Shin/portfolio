@@ -147,7 +147,6 @@ function Home() {
       setTimeout(() => setCurOpacity(1), 5);
    }, [history.location.pathname]);
 
-   console.log(curPage);
    const handlePageChangeClick = (offset) => {
       if (offset < 0) {
          dispatch(decrease());
