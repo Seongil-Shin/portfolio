@@ -3,6 +3,12 @@ import React, { useEffect } from "react";
 import { css } from "@emotion/react";
 import CustomGridList from "./elements/CustomGridList";
 
+const container = `
+   width:100%;
+   height:calc(100% - 40px);
+   overflow-y:auto;
+   padding-bottom:40px;
+`;
 const ShortProfile = `
    text-align:center;
    display : flex;
@@ -19,7 +25,6 @@ const ShortProfile = `
       flex-basis:50%;
       text-align:left;
       padding-left:0px;
-
    }
 `;
 const Stacks = `
@@ -45,8 +50,10 @@ const StackEtc = `
 function MobileProfile({ data }) {
    useEffect(() => window.scrollTo(0, 0), []);
    return (
-      <>
-         {" "}
+      <div
+         css={css`
+            ${container}
+         `}>
          <h2>프로필</h2>
          <div
             css={css`
@@ -114,7 +121,7 @@ function MobileProfile({ data }) {
                </div>
             </div>
          </div>
-      </>
+      </div>
    );
 }
 export default MobileProfile;

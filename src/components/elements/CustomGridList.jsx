@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
    },
    gridList: {
       width: "90%",
+      height: "450px",
    },
    icon: {
       color: "rgba(255, 255, 255, 0.54)",
@@ -47,7 +48,6 @@ export default function CustomGridList({ tileData, deleteStack }) {
 
    return (
       <div className={classes.root}>
-         {" "}
          {tileData && (
             <GridList cellHeight={180} cols={1} className={classes.gridList}>
                {tileData.map((tile, idx) => (

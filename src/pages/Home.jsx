@@ -10,15 +10,14 @@ import scrollVideo from "../assets/scrollVideo.json";
 import { useDispatch, useSelector } from "react-redux";
 import { decrease, increase } from "../modules/pageIndex";
 import { Route, useHistory } from "react-router";
-import palette from "../lib/styles/palette";
 
-const CurrntPageStyle = (isCur, curOpacity) =>
-   ` z-index:${isCur ? 1 : -1};
+const CurrntPageStyle = (isCur, curOpacity) => ` 
+   z-index:${isCur ? 1 : -1};
    opacity:${isCur ? curOpacity : "0"}; 
-   transition: opacity 0.5s linear 0s
-   `;
+   transition: opacity 0.5s linear 0s;
+`;
 
-const PageChangeContainer = (page, isMobile) => `
+const PageChangeContainer = `
    position:fixed;
    bottom:0;
    left:0;
@@ -27,19 +26,9 @@ const PageChangeContainer = (page, isMobile) => `
    text-align:center;
    line-height:10vh;
    z-index:10;
-
-   @media only screen and (max-width:767px) {
-      ${
-         page === 1 &&
-         `position:relative; top:${600 + (window.innerWidth / 2) * 1.3 + 50}px;`
-      }
-   }
-   @media only screen and (max-width:599px) {
-      ${page === 2 && "position:relative; top:1600px;"}
-   }
 `;
-const ScrollVideoStyle = (showScroll) =>
-   `opacity:${showScroll ? 0.7 : 0}; 
+const ScrollVideoStyle = `
+   opacity:0.7;
    width:100px;
    margin :0px auto; 
    height: 10vh;
@@ -47,7 +36,7 @@ const ScrollVideoStyle = (showScroll) =>
    :hover {
       cursor:pointer;
    }
-   `;
+`;
 const PageChangeLeft = () => `
    position:absolute;
    left:30px;
@@ -78,15 +67,9 @@ const bottomNav = css`
    background-color: rgba(252, 250, 247, 1);
 `;
 
-const bottomNavOffset = css`
-   width: 10vw;
-   height: 40px;
-`;
-
 const paths = ["/", "/profile", "/projects", "/contact"];
 
 function Home() {
-   const [showScroll, setShowScroll] = useState(true);
    const [touchLast, setTouchLast] = useState(false);
    const curPage = useSelector(({ pageIndex }) => pageIndex);
    const dispatch = useDispatch();
@@ -157,10 +140,14 @@ function Home() {
       setCurOpacity(0);
       setTimeout(() => {
          history.push(paths[curPage]);
-         setTimeout(() => setCurOpacity(1), 5);
       }, 600);
    }, [curPage, history]);
 
+   useEffect(() => {
+      setTimeout(() => setCurOpacity(1), 5);
+   }, [history.location.pathname]);
+
+   console.log(curPage);
    const handlePageChangeClick = (offset) => {
       if (offset < 0) {
          dispatch(decrease());
@@ -171,7 +158,7 @@ function Home() {
 
    return (
       <>
-         <div>
+         <>
             <Route exact path="/">
                <div
                   className="MainPage Landing"
@@ -199,12 +186,6 @@ function Home() {
                      ${CurrntPageStyle(curPage === 2, curOpacity)}
                   `}>
                   <WorksContainer />
-                  {isMobile && (
-                     <div
-                        css={css`
-                           ${bottomNavOffset}
-                        `}></div>
-                  )}
                </div>
             </Route>
 
@@ -221,14 +202,14 @@ function Home() {
             {!isMobile ? (
                <div
                   css={css`
-                     ${PageChangeContainer(curPage, isMobile)}
+                     ${PageChangeContainer}
                   `}>
                   {!touchLast && curPage !== 2 ? (
                      <Player
                         src={scrollVideo}
                         speed="0.9"
                         css={css`
-                           ${ScrollVideoStyle(showScroll)}
+                           ${ScrollVideoStyle}
                         `}
                         renderer="svg"
                         controls
@@ -261,7 +242,7 @@ function Home() {
                   </div>
                </div>
             )}
-         </div>
+         </>
       </>
    );
 }

@@ -6,13 +6,31 @@ import palette from "../lib/styles/palette";
 import SingleCard from "./elements/SingleCard";
 import Pagination from "@material-ui/lab/Pagination";
 import { Button } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
-const Container = () => `
-   text-align:center;
-   height:100%;
-   max-height:100%;
+const Container = (isMobile) => `
    display:flex;
-   flex-direction:column;
+   flex-direction :column;
+   
+   position:absolute;
+   top:50%;
+   transform:translateY(-50%);
+
+   width:100%;
+   max-height:calc(100% - 40px);
+   padding-bottom:40px;
+   overflow-y:auto;
+   text-align:center;
+   gap:1rem;
+
+   ${
+      isMobile &&
+      `
+      position:relative;
+      top:0;
+      transform:none;
+      `
+   }
 `;
 
 const HeaderStyle = () => `
@@ -46,12 +64,13 @@ const AddButton = () => `
 const AlignPage = (length) => `
    width:${(length + 2) * 38}px; 
    margin : 0px auto; 
-   z-index:100;`;
+   z-index:100;
+`;
 
 const useStyles = makeStyles((theme) => ({
    pagination: {
       color: palette.thatch,
-      zIndex:100,
+      zIndex: 100,
       "& button": {
          color: palette.thatch,
       },
@@ -61,6 +80,9 @@ const useStyles = makeStyles((theme) => ({
 function Works({ list, setOnMod, isAdmin }) {
    const classes = useStyles();
    const [page, setPage] = useState(0);
+   const isMobile = useSelector(
+      ({ isMobileReducer }) => isMobileReducer.isMobile
+   );
 
    const handleChange = (e, n) => {
       setPage(n - 1);
@@ -68,7 +90,7 @@ function Works({ list, setOnMod, isAdmin }) {
    return (
       <div
          css={css`
-            ${Container()}
+            ${Container(isMobile)}
          `}>
          <h2
             css={css`

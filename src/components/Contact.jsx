@@ -13,11 +13,12 @@ import palette from "../lib/styles/palette";
 const container = `
    position:relative;
    top:10vh;
-   width:70%;
+   width:90%;
    margin:0px auto;
 `;
 const errMsg = `
-   margin: 5px 12px;
+   margin: 0rem 0.75rem;
+   font-size:0.75rem;
    color:${palette.err};
 `;
 const useStyles = makeStyles((theme) => ({
