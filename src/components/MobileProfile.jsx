@@ -69,10 +69,10 @@ function MobileProfile({ data }) {
             <div className="profile-list">
                <ul>
                   {data.aboutme?.map((item, idx) => (
-                     <>
-                        <li key={`list-${idx}`}>{item?.line}</li>
+                     <div key={idx}>
+                        <li>{item?.line}</li>
                         <br />
-                     </>
+                     </div>
                   ))}
                   <li>
                      깃허브 :{" "}
