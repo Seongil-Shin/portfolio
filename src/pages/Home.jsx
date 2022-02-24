@@ -77,7 +77,9 @@ function Home() {
       ({ isMobileReducer }) => isMobileReducer.isMobile
    );
    const history = useHistory();
+   const [historyStack, setHistoryStack] = useState([]);
    const [curOpacity, setCurOpacity] = useState(0);
+   const [lastLocationKey, setLastLocationKey] = useState("");
 
    useEffect(() => {
       let canEnter = true;
@@ -104,10 +106,10 @@ function Home() {
          }
 
          if (e.wheelDeltaY < 0 || e.deltaY > 0) {
-            dispatch(increase());
+            dispatch(increase(true));
             setTimeout(checkIsTransitioning, 50);
          } else {
-            dispatch(decrease());
+            dispatch(decrease(true));
             setTimeout(checkIsTransitioning, 50);
          }
       };
@@ -131,27 +133,60 @@ function Home() {
    }, [dispatch]);
 
    useEffect(() => {
-      if (window.innerWidth < 1280) {
+      if (window.innerWidth < 1280 || curPage.index >= 3) {
          setTouchLast(true);
       }
-      if (curPage >= 3) {
-         setTouchLast(true);
+   }, [curPage.index]);
+
+   useEffect(() => {
+      if (curPage.doAnimation) {
+         setCurOpacity(0);
+         setTimeout(() => {
+            history.push(paths[curPage.index]);
+            setTimeout(() => setCurOpacity(1), 0);
+         }, 600);
+      } else {
+         setCurOpacity(1);
       }
-      setCurOpacity(0);
-      setTimeout(() => {
-         history.push(paths[curPage]);
-      }, 600);
    }, [curPage, history]);
 
    useEffect(() => {
-      setTimeout(() => setCurOpacity(1), 5);
-   }, [history.location.pathname]);
+      setHistoryStack((prev) => {
+         if (
+            prev.length >= 2 &&
+            prev.some((item) => item.key === history.location.key)
+         ) {
+            const lastPathnameIdx = prev.findIndex(
+               (item) => item.key === lastLocationKey
+            );
+            if (
+               paths.findIndex(
+                  (item) => item === prev[lastPathnameIdx].pathname
+               ) < paths.findIndex((item) => item === history.location.pathname)
+            ) {
+               dispatch(increase(false));
+            } else {
+               dispatch(decrease(false));
+            }
+            return prev;
+         } else {
+            return [
+               ...prev,
+               {
+                  pathname: history.location.pathname,
+                  key: history.location.key,
+               },
+            ];
+         }
+      });
+      setLastLocationKey(history.location.key);
+   }, [dispatch, history.location]);
 
    const handlePageChangeClick = (offset) => {
       if (offset < 0) {
-         dispatch(decrease());
+         dispatch(decrease(true));
       } else {
-         dispatch(increase());
+         dispatch(increase(true));
       }
    };
 
@@ -162,7 +197,7 @@ function Home() {
                <div
                   className="MainPage Landing"
                   css={css`
-                     ${CurrntPageStyle(curPage === 0, curOpacity)}
+                     ${CurrntPageStyle(curPage.index === 0, curOpacity)}
                   `}>
                   <LandingContainer />
                </div>
@@ -172,7 +207,7 @@ function Home() {
                <div
                   className="MainPage"
                   css={css`
-                     ${CurrntPageStyle(curPage === 1, curOpacity)}
+                     ${CurrntPageStyle(curPage.index === 1, curOpacity)}
                   `}>
                   <ProfileContainer />
                </div>
@@ -182,7 +217,7 @@ function Home() {
                <div
                   className="MainPage"
                   css={css`
-                     ${CurrntPageStyle(curPage === 2, curOpacity)}
+                     ${CurrntPageStyle(curPage.index === 2, curOpacity)}
                   `}>
                   <WorksContainer />
                </div>
@@ -192,7 +227,7 @@ function Home() {
                <div
                   className="MainPage"
                   css={css`
-                     ${CurrntPageStyle(curPage === 3, curOpacity)}
+                     ${CurrntPageStyle(curPage.index === 3, curOpacity)}
                   `}>
                   <ContactContainer />
                </div>
@@ -203,7 +238,7 @@ function Home() {
                   css={css`
                      ${PageChangeContainer}
                   `}>
-                  {!touchLast && curPage !== 2 ? (
+                  {!touchLast && curPage.index !== 2 ? (
                      <Player
                         src={scrollVideo}
                         speed="0.9"

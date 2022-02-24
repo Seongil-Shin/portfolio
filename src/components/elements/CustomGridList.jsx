@@ -51,9 +51,7 @@ export default function CustomGridList({ tileData, deleteStack }) {
          {tileData && (
             <GridList cellHeight={180} cols={1} className={classes.gridList}>
                {tileData.map((tile, idx) => (
-                  <GridListTile
-                     key={`tile-${tile.type}-${idx}`}
-                     className={classes.item}>
+                  <GridListTile key={idx} className={classes.item}>
                      {typeof tile.image === "object" ? (
                         <img
                            src={URL.createObjectURL(tile.image)}
